@@ -1,0 +1,205 @@
+# Label to start the mini-game
+label start_mini_game:
+    style textbutton is default
+    $ current_room = 0
+    $ rooms = [
+        ("hearth", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageHearth.png", 1920, 1080)),
+        ("kitchen", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageKitchen.png", 1920, 1080)),
+        ("bedroom", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageBedroom.png", 1920, 1080)),
+        ("windows", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageWindows.png", 1920, 1080)),
+        ("interior", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageInterior.png", 1920, 1080)),
+        ("table", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageTable.png", 1920, 1080)),
+        ("library", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageLibrary.png", 1920, 1080))
+    ]
+
+    # Initialize the inventory and flags
+    default inventory = []
+    default riddle_started = False
+    default puzzle_completed = False
+    default puzzle_slots = [None, None, None]  # To hold book order for the puzzle
+
+    # Define items in each room
+    $ room_items = {
+        "hearth": [("Paper", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/Paper.png", 100, 100), 1150, 725)],
+        "kitchen": [("FruitGreen", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/FruitGreen.png", 100, 100), 1150, 725)],
+        "bedroom": [("BookBlue", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/BookBlue.png", 100, 100), 1150, 725)],
+        "windows": [("BookGreen", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/BookGreen.png", 100, 100), 1150, 725)],
+        "interior": [("CoinSilver", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/CoinSilver.png", 100, 100), 1150, 725)],
+        "table": [("BookBrown", im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/BookBrown.png", 100, 100), 1150, 725)],
+        "library": []
+    }
+
+    # Show the initial room
+    call show_room
+
+    return
+
+# Function to display the current room
+label show_room:
+    $ room_name, room_image_path = rooms[current_room]
+
+    # Display the current room's background
+    scene expression room_image_path with fade
+
+    # Display items in the room and backpack icon if riddle has started
+    call screen display_items(room_name)
+
+    return
+
+# Screen for displaying items in the room
+screen display_items(room_name):
+    for item_name, item_image, item_x, item_y in room_items[room_name]:
+        if item_name not in inventory:
+            imagebutton:
+                idle im.Scale(item_image, 100, 100)
+                hover im.Scale(item_image, 120, 120)
+                xpos item_x ypos item_y
+                focus_mask True
+                action Function(pick_item, room_name, item_name)
+
+    if riddle_started:
+        use navigation_arrows
+        use inventory_icon
+
+    # Enhanced "Solve the Puzzle" button for the library
+    if room_name == "library" and len([b for b in inventory if "Book" in b]) == 3 and not puzzle_completed:
+        textbutton "Решить головоломку":
+            style "solve_puzzle_button"
+            xpos 0.5 ypos 0.9
+            anchor (0.5, 0.5)
+            action Show("final_puzzle")
+
+style solve_puzzle_button is textbutton:
+    color "#FFA500"  # Orange color for visibility
+    size 45
+    background "#00000080"  # Semi-transparent black background
+    hover_background "#FFA50080"  # Lighter background on hover
+    outlines [(2, "#FFFFFF", 0, 0)]  # White outline for contrast
+    padding (10, 20)
+    
+
+# Screen for navigation arrows
+screen navigation_arrows:
+    imagebutton:
+        idle im.Scale("images/backgrounds/cottage_MiniGame/arrow_left.png", 100, 100)
+        xpos 50 ypos 500
+        action Function(change_room, -1)
+
+    imagebutton:
+        idle im.Scale("images/backgrounds/cottage_MiniGame/arrow_right.png", 100, 100)
+        xpos 1770 ypos 500
+        action Function(change_room, 1)
+
+# Inventory icon screen
+screen inventory_icon:
+    imagebutton:
+        idle im.Scale("images/backgrounds/cottage_MiniGame/Sack.png", 150, 150)
+        xpos 1770 ypos 15
+        action Show("inventory_screen_ctg")
+
+# Inventory screen
+screen inventory_screen_ctg:
+    frame:
+        xpos 0.8 ypos 0.1
+        has vbox
+        text "Инвентарь:" size 40
+
+        # Display collected items in inventory
+        for item in inventory:
+            add im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(item), 100, 100)
+        textbutton "Закрыть" action Hide("inventory_screen_ctg")
+
+# Final puzzle screen for arranging books in correct order
+screen final_puzzle:
+    frame:
+        xpos 0.3 ypos 0.4
+        has vbox
+        text "Расставьте предметы в правильном порядке:" size 40
+
+        hbox:
+            for i in range(3):
+                if puzzle_slots[i] is None:
+                    textbutton "Slot {}".format(i + 1):
+                        action [SetVariable("selected_slot", i), ShowMenu("book_selection")]
+                else:
+                    add im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(puzzle_slots[i]), 100, 100)
+
+        textbutton "Готово" action Function(check_puzzle_solution)
+        textbutton "Закрыть" action Hide("final_puzzle")
+
+# Book selection screen for choosing a book to place in a slot
+screen book_selection:
+    frame:
+        xpos 0.5 ypos 0.5
+        has vbox
+        text "Выберите книгу для размещения в слоте:" size 30
+
+        hbox:
+            # Display only available books in inventory that are not in slots
+            for book in inventory:
+                if book not in puzzle_slots:
+                    imagebutton:
+                        idle im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(book), 100, 100)
+                        action [SetVariable("selected_book", book), Return(), Function(set_puzzle_slot, selected_slot)]
+
+        textbutton "Закрыть" action Return()
+
+# Python function to change rooms and pick items
+init python:
+    def change_room(direction):
+        global current_room
+        # Close any open screens before changing the room
+        renpy.hide_screen("inventory_screen_ctg")
+        renpy.hide_screen("final_puzzle")
+
+        # Update the current room
+        current_room = (current_room + direction) % len(rooms)
+        renpy.call("show_room")
+
+    def pick_item(room_name, item_name):
+        global riddle_started
+        if item_name == "Paper":
+            riddle_started = True
+            renpy.notify("Найдите мудрость в земле, мир в небе и жизнь в зелени природы")
+            room_items[room_name] = [item for item in room_items[room_name] if item[0] != "Paper"]
+        elif "Book" in item_name:
+            if item_name not in inventory:
+                inventory.append(item_name)
+                renpy.notify("This book might be useful.")
+                room_items[room_name] = [item for item in room_items[room_name] if item[0] != item_name]
+        else:
+            renpy.notify("Этот предмет не имеет отношения к загадке.")
+        renpy.call("show_room")
+
+    def set_puzzle_slot(index):
+        global selected_book, puzzle_slots, inventory
+        if selected_book is not None:
+            puzzle_slots[index] = selected_book
+            inventory.remove(selected_book)  # Remove the selected book from the inventory
+            selected_book = None  # Clear selected book after setting the slot
+
+    def check_puzzle_solution():
+        if puzzle_slots == ["BookBrown", "BookBlue", "BookGreen"]:
+            renpy.hide_screen("final_puzzle")
+            global puzzle_completed
+            puzzle_completed = True
+            renpy.jump("puzzle_completed")
+        else:
+            renpy.notify("Порядок указан неверно. Попробуйте еще раз.")
+            for i in range(3):
+                if puzzle_slots[i] is not None:
+                    inventory.append(puzzle_slots[i])  # Return the books to inventory
+                puzzle_slots[i] = None
+        renpy.call("show_room")
+        
+# Label for the puzzle completion and ending scene
+label puzzle_completed:
+    # Show message for finding the potion
+    scene black with fade
+    centered "Вы нашли таинственное зелье, спрятанное в глубинах библиотеки..."
+
+    # Give the player a final message before leaving
+    centered "С зельем в руках вы выходите из коттеджа, оставляя его тайны позади."
+
+    # End the mini-game
+    jump secondMeeting

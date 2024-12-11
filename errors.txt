@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/scripts/school/inventory.rpy", line 22: invalid syntax
+        return required_items.issubset(inventory_set)check_inventory_for_items
+                                                      ^
+
+Ren'Py Version: Ren'Py 8.3.2.24090902
+Wed Dec 11 13:55:40 2024
