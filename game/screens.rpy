@@ -99,7 +99,7 @@ screen inventory_screen_ctg:
 
         # Display collected items in inventory
         for item in inventory:
-            add im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(item), 100, 100)
+            add im.Scale("images/items/ctg_MiniGame/{}.png".format(item), 100, 100)
         textbutton "Закрыть" action Hide("inventory_screen_ctg")
 
 # Экран "Последняя головоломка" для расстановки книг в правильном порядке
@@ -119,7 +119,7 @@ screen final_puzzle:
                     textbutton "Slot {}".format(i + 1):
                         action [SetVariable("selected_slot", i), ShowMenu("book_selection")]
                 else:
-                    add im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(puzzle_slots[i]), 100, 100)
+                    add im.Scale("images/items/ctg_MiniGame/{}.png".format(puzzle_slots[i]), 100, 100)
 
         textbutton "Готово" action Function(check_puzzle_solution)
 
@@ -135,7 +135,7 @@ screen book_selection:
             for book in inventory:
                 if book not in puzzle_slots:
                     imagebutton:
-                        idle im.Scale("images/backgrounds/cottage_MiniGame/cottage_items/{}.png".format(book), 100, 100)
+                        idle im.Scale("images/items/ctg_MiniGame/{}.png".format(book), 100, 100)
                         action [SetVariable("selected_book", book), Return(), Function(set_puzzle_slot, selected_slot)]
 
         textbutton "Закрыть" action Return()

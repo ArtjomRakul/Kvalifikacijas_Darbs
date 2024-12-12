@@ -18,7 +18,7 @@ init python:
         renpy.show_screen("relationships_button")
 
     # Function to change rooms with a transition effect
-    def change_room(new_location):
+    def change_school_room(new_location):
         global current_location
         current_location = new_location
         update_background(transition=dissolve)
@@ -71,7 +71,7 @@ screen navigation_arrows():
                     }.get(direction, "images/navigation_arrows/arrow_right.png"), 75, 75)
                     xpos xpos
                     ypos ypos
-                    action Function(change_room, target_room)
+                    action Function(change_school_room, target_room)
 
 # Screen for displaying clickable characters in rooms
 screen room_characters():

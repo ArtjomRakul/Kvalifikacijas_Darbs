@@ -63,7 +63,7 @@ init python:
         global riddle_started
         if item_name == "Paper":
             riddle_started = True
-            renpy.notify("Find wisdom in the {color=#8b4e25}earth{/color}, peace in the {color=#0000ff}sky{/color}, and life in the green of {color=#00ff00}nature{/color}")
+            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
             room_items[room_name] = [item for item in room_items[room_name] if item[0] != "Paper"]
         elif "Book" in item_name:
             if item_name not in inventory:
@@ -89,7 +89,7 @@ init python:
             renpy.jump("puzzle_completed")
         else:
             renpy.notify("The order is incorrect. Try again.")
-            renpy.notify("Find wisdom in the {color=#8b4e25}earth{/color}, peace in the {color=#0000ff}sky{/color}, and life in the green of {color=#00ff00}nature{/color}")
+            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
             for i in range(3):
                 if puzzle_slots[i] is not None:
                     inventory.append(puzzle_slots[i])  # Return the books to inventory
