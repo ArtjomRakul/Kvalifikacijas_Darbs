@@ -1,108 +1,122 @@
-﻿## Экраны для уведомлений  #########################################################
+﻿## Custom notification screen  #########################################################
 ##
-## Экран вызывается для отображения уведомлений во время игры.
+## The screen is called up to display notifications during the game.
 ## 
 
-# Пользовательский экран уведомлений
+# Custom notification screen
 screen custom_notify(message, duration=3):
     frame:
         align (0.5, 0.1)
         background "#3338"
         padding (10, 10)
-        at fade_in_slide # Применение обновленного преобразования
+        # Applying the updated transformation
+        at fade_in_slide 
 
         text message color "#FFFFFF" size 28
 
-    # Автоматическое скрытие по истечении времени
+    # Automatic hiding after time expires
     timer duration action Hide("custom_notify")
 
-# Определите преобразование fade_in_slide
+# Define fade_in_slide transformation
 transform fade_in_slide:
     alpha 0.0
     ypos 0.05
-    easein 0.5 alpha 1.0 ypos 0.1 # Затухание и скольжение вниз
+    # Damping and sliding down
+    easein 0.5 alpha 1.0 ypos 0.1 
 
-    # Пауза на время, в течение которого уведомление должно быть видно (соответствует длительности таймера)
+    # Pause for the time during which the notification should be visible (corresponds to the duration of the timer)
     pause 2.0 
 
-    # Затухание и скольжение вверх
+    # Damping and upward sliding
     easeout 0.5 alpha 0.0 ypos 0.05
 
-## Экраны для мини-игры  #########################################################
+## Screens for the mini-game  #########################################################
 ##
-## Экран вызывается для отображения мини-игры внутри игры. 
-## ctg_MiniGame -  название мини-игры.
+## The screen is called up to display a mini-game within the game. 
+## ctg_MiniGame -  mini-game name.
 ##
 
-# Экран для отображения предметов в комнате
+# Screen for displaying items in the room
 screen display_items(room_name):
-    # Отображение предметов в комнате
+    # Displaying items in the room
     for item_name, item_image, item_x, item_y in room_items[room_name]:
         if item_name not in inventory:
             imagebutton:
+                # Display item images
                 idle im.Scale(item_image, 100, 100)
                 hover im.Scale(item_image, 120, 120)
                 xpos item_x ypos item_y
+                # Allow accurate hover detection
                 focus_mask True
+                # Add item to inventory when clicked
                 action Function(pick_item, room_name, item_name)
 
-    # Отображение стрелок навигации и значка инвентаря при начале мини-игры
+    # Display navigation arrows and inventory icon when starting a mini-game
     if riddle_started:
         use navigation_arrows_ctg
         use inventory_icon_ctg
 
-    # Отображение кнопки в случае выполнения условий для решения головоломки
+    # Display a button when the conditions for solving a puzzle are satisfied
     if room_name == "library" and len([b for b in inventory if "Book" in b]) == 3 and not puzzle_completed:
-        textbutton "Решить головоломку":
+        textbutton "Solve Puzzle":
             style "solve_puzzle_button"
             xpos 0.5 ypos 0.9
             anchor (0.5, 0.5)
             action Show("final_puzzle")
 
-# Пользовательский стиль для кнопки «Решить головоломку»
+# Custom style for the “Solve Puzzle” button
 style solve_puzzle_button is textbutton:
     color "#FFA500"  # Оранжевый цвет для видимости
     size 45
     background "#00000080"
-    hover_background "#FFA50080"  # Светлый фон при наведении
+    # Light background on hover
+    hover_background "#FFA50080"  
     outlines [(2, "#FFFFFF", 0, 0)]
     padding (10, 20)
     
 
-# Экран для стрелок навигации
+# Screen for navigation arrows
 screen navigation_arrows_ctg:
+    # Display navigation arrows when the mini-game is not active
     if not puzzle_active:
+        # Left navigation arrow
         imagebutton:
             idle im.Scale("images/navigation_arrows/arrow_left.png", 100, 100)
             xpos 50 ypos 500
+            # Move to the previous room
             action Function(change_room, -1)
 
+        # Right navigation arrow
         imagebutton:
             idle im.Scale("images/navigation_arrows/arrow_right.png", 100, 100)
             xpos 1770 ypos 500
+            # Move to the next room
             action Function(change_room, 1)
 
-# Экран значка инвентаря
+# Screen for the inventory icon
 screen inventory_icon_ctg:
+    # Display the inventory icon when the mini-game is not active
     if not puzzle_active:
         imagebutton:
             idle im.Scale("images/backgrounds/cottage_MiniGame/Sack.png", 150, 150)
             xpos 1770 ypos 15
+            # Show the inventory screen when clicked
             action Show("inventory_screen_ctg")
 
-# Экран инвентаря
+# Screen for the inventory display
 screen inventory_screen_ctg:
     frame:
         xpos 0.8 ypos 0.1
+        # Vertical layout for items
         has vbox
-        text "Инвентарь:" size 40
+        text "Inventory:" size 40
 
         # Display collected items in inventory
         for item in inventory:
             add im.Scale("images/items/ctg_MiniGame/{}.png".format(item), 100, 100)
-        textbutton "Закрыть" action Hide("inventory_screen_ctg")
+        textbutton "Close" action Hide("inventory_screen_ctg")
 
-# Экран "Последняя головоломка" для расстановки книг в правильном порядке
+# Screen for arranging the books in the correct order
 screen final_puzzle:
     # When entering this screen, set puzzle_active to True
     on "show" action SetVariable("puzzle_active", True)
@@ -111,19 +125,22 @@ screen final_puzzle:
     frame:
         xpos 0.3 ypos 0.4
         has vbox
-        text "Расставьте предметы в правильном порядке:" size 40
+        text "Put the items in the correct order:" size 40
 
         hbox:
             for i in range(3):
                 if puzzle_slots[i] is None:
+                    # Display empty slots as text buttons
                     textbutton "Slot {}".format(i + 1):
+                        # Open book selection menu
                         action [SetVariable("selected_slot", i), ShowMenu("book_selection")]
                 else:
+                    # Display the book placed in the slot
                     add im.Scale("images/items/ctg_MiniGame/{}.png".format(puzzle_slots[i]), 100, 100)
 
         textbutton "Готово" action Function(check_puzzle_solution)
 
-# Экран выбора книги, позволяющий выбрать книгу для размещения в слоте
+# A screen allowing selection of a book to be placed in the slot
 screen book_selection:
     frame:
         xpos 0.5 ypos 0.5
@@ -131,37 +148,25 @@ screen book_selection:
         text "Выберите книгу для размещения в слоте:" size 30
 
         hbox:
-            # Отображать только доступные книги в инвентаре, которые не находятся в слотах
+            # Display only available books in inventory that are not in slots
             for book in inventory:
                 if book not in puzzle_slots:
                     imagebutton:
                         idle im.Scale("images/items/ctg_MiniGame/{}.png".format(book), 100, 100)
-                        action [SetVariable("selected_book", book), Return(), Function(set_puzzle_slot, selected_slot)]
+                        action [
+                            SetVariable("selected_book", book), # Set the selected book
+                            Return(), 
+                            Function(set_puzzle_slot, selected_slot) # Place the book in the selected slot
+                        ]
 
-        textbutton "Закрыть" action Return()
+        textbutton "Close" action Return()
 
 
-## Экраны для мини-игры  #########################################################
+## Screens for the mini-game  #########################################################
 ##
-## Экран вызывается для отображения мини-игры внутри игры. 
-## witcher_Minigame -  название мини-игры.
+## The screen is called up to display a mini-game within the game. 
+## witcher_Minigame -  mini-game name.
 ##
-
-
-# Define custom styles for the True and False buttons
-style true_button:
-    background "#FFFFFF"
-    color "#00AA00"  # Text color
-    hover_background "#00AA00"
-    hover_color "#FFFFFF"  # Text color on hover
-    padding (20, 10)
-
-style false_button:
-    background "#FFFFFF"
-    color "#AA0000"  # Text color
-    hover_background "#AA0000"
-    hover_color "#FFFFFF"  # Text color on hover
-    padding (20, 10)
 
 # Screen to display question and answer options
 screen witch_minigame_screen(statement, correct_answer):
@@ -186,6 +191,21 @@ screen witch_minigame_screen(statement, correct_answer):
         textbutton "False":
             action Function(handle_answer, False, correct_answer)
             style "false_button"
+
+# Define custom styles for the True and False buttons
+style true_button:
+    background "#FFFFFF"
+    color "#00AA00"  # Text color
+    hover_background "#00AA00"
+    hover_color "#FFFFFF"  # Text color on hover
+    padding (20, 10)
+
+style false_button:
+    background "#FFFFFF"
+    color "#AA0000"  # Text color
+    hover_background "#AA0000"
+    hover_color "#FFFFFF"  # Text color on hover
+    padding (20, 10)
 
 ################################################################################
 ## Инициализация
