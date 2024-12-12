@@ -453,19 +453,19 @@ label forestCrossroad:
 label unknown_house:
     scene unknownHouse_bg with fade
     show mainCharacter at center
-    "Ты идешь по тропинке и вдруг видишь перед собой дом."
-    "Ты не знаешь чей это дом и как он тут оказался, но ты чувствуешь, что от него не исходит что-то зловещее."
-    "Тебе совсем не страшно от того, что или кто нам находится и что могут с тобой сделать."
-    "Ты уверен, что ты в безопасности и тебе не стоит бояться этого места."
-    p "(про себя) Довольно уютный домик."
-    p "(про себя) Не думаю, что со мной случиться что-то страшное, если я зайду в этот дом."
-    p "Может быть мне даже повезёт и я кого-нибудь встречу и он мне поможет в моём пути."
-    "Ты, сделав сильный вздох, заходишь в дом"
+    "You're walking down a path and suddenly you see a house in front of you."
+    "You don't know whose house it is or how it got here, but you sense that something sinister doesn't emanate from it."
+    "You're not at all afraid of what or who we are or what they might do to you."
+    "You're sure you're safe and you shouldn't be afraid of this place."
+    p "(to myself) It's a pretty cozy cabin."
+    p "(to myself) I don't think anything terrible will happen to me if I go into this house."
+    p "Maybe I'll even get lucky and meet someone and they'll help me on my journey."
+    "You take a big breath and walk into the house."
     scene houseEntry_bg with fade
-    "Ты входишь внутрь дома."
-    "Внутри довольно ярко и уютно."
-    "Дома довольно чисто, но в доме никого нету"
-    "Ты решаешь осмотреться и видишь, что рядом лежит какая-то записка"
+    "You go inside the house."
+    "It's pretty bright and cozy inside."
+    "The house is pretty clean, but there's no one in the house"
+    "You decide to look around and see that there's some kind of note lying nearby"
     jump start_house_minigame
     
 # The scene of the meeting with the Shadows in the dark woods 
@@ -915,7 +915,7 @@ label pathToTavern:
         elif relationship_wiseMan == -1 and relationship_sister == -1: 
             fs "You have rejected the Wise Man and have not understood his lessons." 
             fs "You also rejected Kindness, even though you needed her and she looked like your sister." 
-            p "But there was a huge shadow! И... and there was a huge shadow!" 
+            p "But there was a huge shadow! And... and there was a huge shadow!" 
             fs "(menacingly) Don't interrupt! I'm talking now!" 
             "You got scared and shut up." 
             fs "Yes, there was a huge shadow." 

@@ -66,7 +66,7 @@ screen display_items(room_name):
 
 # Custom style for the “Solve Puzzle” button
 style solve_puzzle_button is textbutton:
-    color "#FFA500"  # Оранжевый цвет для видимости
+    color "#FFA500"  # Orange color for visibility
     size 45
     background "#00000080"
     # Light background on hover
@@ -138,14 +138,14 @@ screen final_puzzle:
                     # Display the book placed in the slot
                     add im.Scale("images/items/ctg_MiniGame/{}.png".format(puzzle_slots[i]), 100, 100)
 
-        textbutton "Готово" action Function(check_puzzle_solution)
+        textbutton "Done" action Function(check_puzzle_solution)
 
 # A screen allowing selection of a book to be placed in the slot
 screen book_selection:
     frame:
         xpos 0.5 ypos 0.5
         has vbox
-        text "Выберите книгу для размещения в слоте:" size 30
+        text "Select a book to place in the slot:" size 30
 
         hbox:
             # Display only available books in inventory that are not in slots

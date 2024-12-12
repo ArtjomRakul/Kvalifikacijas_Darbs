@@ -3,6 +3,7 @@ label start_house_minigame:
     style textbutton is default
     default puzzle_active = False
     $ current_room = 0
+    # List of rooms and their background images
     $ rooms = [
         ("hearth", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageHearth.png", 1920, 1080)),
         ("kitchen", im.Scale("images/backgrounds/cottage_MiniGame/cottage_backgrounds/CottageKitchen.png", 1920, 1080)),
@@ -17,9 +18,9 @@ label start_house_minigame:
     default inventory = []
     default riddle_started = False
     default puzzle_completed = False
-    default puzzle_slots = [None, None, None]  # To hold book order for the puzzle
+    default puzzle_slots = [None, None, None]  
 
-    # Define items in each roomgame/
+    # Define the items present in each room, with their locations indicated
     $ room_items = {
         "hearth": [("Paper", im.Scale("images/items/ctg_MiniGame/Paper.png", 100, 100), 1150, 725)],
         "kitchen": [("FruitGreen", im.Scale("images/items/ctg_MiniGame/FruitGreen.png", 100, 100), 1150, 725)],
@@ -35,20 +36,21 @@ label start_house_minigame:
 
     return
 
-# Function to display the current room
+# Label to display the current room
 label show_room:
     $ room_name, room_image_path = rooms[current_room]
 
-    # Display the current room's background
+    # Displaying the current room background
     scene expression room_image_path with fade
 
-    # Display items in the room and backpack icon if riddle has started
+    # Display items in the room and the backpack icon if riddle has started
     call screen display_items(room_name)
 
     return
 
-# Python function to change rooms and pick items
+
 init python:
+    # Function to change rooms
     def change_room(direction):
         global current_room
         # Close any open screens before changing the room
@@ -57,30 +59,38 @@ init python:
 
         # Update the current room
         current_room = (current_room + direction) % len(rooms)
+        # Refresh the room display
         renpy.call("show_room")
 
+    # Function to pick up an item in a room
     def pick_item(room_name, item_name):
         global riddle_started
         if item_name == "Paper":
             riddle_started = True
             renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
+            # Remove the paper from the room's items
             room_items[room_name] = [item for item in room_items[room_name] if item[0] != "Paper"]
         elif "Book" in item_name:
             if item_name not in inventory:
                 inventory.append(item_name)
                 renpy.notify("You may find this book helpful.")
+                # Remove the book from the room's items
                 room_items[room_name] = [item for item in room_items[room_name] if item[0] != item_name]
         else:
             renpy.notify("This item has nothing to do with the riddle.")
         renpy.call("show_room")
 
+    # Function to place a book in a puzzle slot
     def set_puzzle_slot(index):
         global selected_book, puzzle_slots, inventory
+        # Check if a book is selected
         if selected_book is not None:
             puzzle_slots[index] = selected_book
-            inventory.remove(selected_book)  # Remove the selected book from the inventory
-            selected_book = None  # Clear selected book after setting the slot
-
+            inventory.remove(selected_book)
+            # Clear selected book after setting the slot
+            selected_book = None 
+    
+    # Function to check if the puzzle solution is correct
     def check_puzzle_solution():
         if puzzle_slots == ["BookBrown", "BookBlue", "BookGreen"]:
             renpy.hide_screen("final_puzzle")
@@ -90,6 +100,7 @@ init python:
         else:
             renpy.notify("The order is incorrect. Try again.")
             renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
+            # Return books to the inventory and reset slots
             for i in range(3):
                 if puzzle_slots[i] is not None:
                     inventory.append(puzzle_slots[i])  # Return the books to inventory
@@ -101,8 +112,6 @@ label puzzle_completed:
     # Show message for finding the potion
     scene black with fade
     centered "You have found a mysterious potion hidden in the depths of the library..."
-
-    # Give the player a final message before leaving
     centered "With potion in hand, you exit the cottage, leaving its mysteries behind."
 
     # End the mini-game
