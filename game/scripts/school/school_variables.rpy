@@ -21,7 +21,6 @@ default bully_interaction = 0
 default time_of_day = "morning"
 default current_location = "hallway11"
 default inventory_items = [None] * 10  # Inventory with 10 empty slots
-default bully_confronted = False
 # Define dictionary to map item names to their properties (name and image)
 define notes_items = {
     "BookGreen": ("BookGreen", im.Scale("images/items/ctg_MiniGame/cottage_items/BookGreen.png", 100, 100)),
@@ -54,6 +53,7 @@ init python:
         "classroom12": lambda: True,
         "hallway13": lambda: True,
         "classroom13": lambda: True,
+        "club_entry": lambda: True,
         "club": lambda: True,
         "roof": lambda: True,
     }
@@ -67,11 +67,9 @@ init python:
         "classroom12": {"right": ("hallway12", 1650, 400)},
         "hallway13": {"left": ("classroom13", 300, 500), "up": ("club_entry", 950, 300), "down": ("hallway12", 950, 900)},
         "classroom13": {"down": ("hallway13", 950, 900)},
-        "club_entry": {"left": ("hallway13", 300, 500), "up": ("club", 950, 500), "right": ("hallway21", 1450, 500)},
+        "club_entry": {"left": ("hallway13", 300, 500), "up": ("club", 950, 500), "right": ("roof", 1450, 500)},
         "club": {"right": ("club_entry", 1250, 500)},
-        "hallway21": {"left": ("classroom21", 300, 500), "up": ("roof", 950, 300), "down": ("hallway13", 950, 900)},
-        "classroom21": {"down": ("hallway21", 950, 900)},
-        "roof": {"down": ("hallway21", 930, 500)},
+        "roof": {"down": ("culb_entry", 930, 500)},
     }
 
     # Determine the presence of characters in certain rooms based on the time of day

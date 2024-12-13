@@ -41,7 +41,6 @@ label music_teacher_dialogue:
         hide bully 
         with dissolve
         "The bully's leaving."
-        $ bully_confronted = True
         $ music_teacher_interaction += 1
         $ remove_task("Go to the music class")
         $ add_task("Talk to your sister in class")
