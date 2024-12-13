@@ -5,8 +5,6 @@ label nerd_dialogue:
         show nerd at right2
         show mainCharacter at left2
         $ nerd_interaction += 1
-
-        # (Evening, club room)
         p "Hi! You're not busy?"
         n "Hey. Tell me what you want."
         p "How did you know I wanted something from you?"

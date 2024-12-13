@@ -1,9 +1,9 @@
 define coin_items = {
-    "CoinSilver": ("CoinSilver", im.Scale("images/items/ctg_MiniGame/CoinSilver.png", 100, 100)),  # Silver Coin image path
-    "CoinBronze": ("CoinBronze", im.Scale("images/items/ctg_MiniGame/CoinBronze.png", 100, 100))   # Bronze Coin image path
+    "CoinSilver": ("CoinSilver", im.Scale("images/items/ctg_MiniGame/CoinSilver.png", 100, 100)),
+    "CoinBronze": ("CoinBronze", im.Scale("images/items/ctg_MiniGame/CoinBronze.png", 100, 100))
 }
 
-# Quiz Mini-Game with Timer and Error Fix
+# Quiz Mini-Game with Timer
 label start_quiz:
     # Initialize variables
     default quiz_correct_answers = 0
@@ -12,7 +12,7 @@ label start_quiz:
     default quiz_time_left = 10.0
     default quiz_timer_active = False
 
-    # Questions and answers
+    # List of quiz questions with options and answers
     define quiz_questions = [
         {"question": "What is the capital of France?", "options": ["Berlin", "Paris", "Rome", "Madrid"], "answer": 1, "subject": "Geography"},
         {"question": "What is the powerhouse of the cell?", "options": ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], "answer": 1, "subject": "Biology"},
@@ -34,13 +34,16 @@ label start_quiz:
     # Start quiz loop
     jump quiz_loop
 
+# Main quiz loop to display questions
 label quiz_loop:
     if quiz_question_index < quiz_total_questions:
+        # Get the current question details
         $ current_question = quiz_questions[quiz_question_index]
         $ quiz_question_text = current_question["question"]
         $ quiz_options = current_question["options"]
         $ quiz_correct_option = current_question["answer"]
         $ quiz_subject = current_question["subject"]
+        # Reset the timer for the new question
         $ quiz_time_left = 10.0
         $ quiz_timer_active = True
 
@@ -50,6 +53,7 @@ label quiz_loop:
     else:
         jump quiz_result
 
+# Handle timeout scenario when the player doesn't answer in time
 label quiz_timeout:
     python:
         import random
@@ -60,7 +64,7 @@ label quiz_timeout:
     $ quiz_question_index += 1
     jump quiz_loop
 
-
+# Show quiz results and determine the outcome
 label quiz_result:
     if quiz_correct_answers >= (quiz_total_questions // 2 + 1):
         jump win_quiz
@@ -71,17 +75,23 @@ label quiz_result:
 screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_subject, quiz_correct_option):
     modal True
     frame:
+        # Center the question frame
         align (0.5, 0.5)
         vbox:
             spacing 10
             text f"Subject: {quiz_subject}" size 30
             text quiz_question_text size 25
+            # Display options
             for i, option in enumerate(quiz_options):
                 textbutton option:
+                    # Handle answer selection
                     action Function(handle_quiz_answer, i, quiz_correct_option)
+            # Display a progress bar for the timer
             bar value AnimatedValue(quiz_time_left / 10.0) range 1.0:
                 xsize 300 ysize 20
+                # Green bar for time remaining
                 left_bar "#00FF00"
+                # Red bar for elapsed time
                 right_bar "#FF0000"
             text f"Time left: {quiz_time_left:.1f} seconds" size 20 color "#FF0000" align (0.5, 0.5)
     # Timer countdown
@@ -89,12 +99,15 @@ screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_su
 
 # Timer and answer handling functions
 init python:
+    # Function to update the timer
     def update_timer():
         store.quiz_time_left -= 0.1
         if store.quiz_time_left <= 0:
             store.quiz_timer_active = False
+            # Trigger timeout handling
             renpy.jump("quiz_timeout")
 
+    # Function to handle selected answers
     def handle_quiz_answer(selected_option, correct_option):
         store.quiz_timer_active = False
         if selected_option == correct_option:
@@ -102,7 +115,7 @@ init python:
         store.quiz_question_index += 1
         renpy.jump("quiz_loop")
 
-# Endings
+# Winning scenario
 label win_quiz:
     n "You passed the quiz! Congratulations!"
     $ nerdQuizWin = True
@@ -114,6 +127,7 @@ label win_quiz:
     show screen custom_notify("Bring the coin to your sister")
     jump mainSchoolLoop
 
+# Losing scenario
 label lose_quiz:
     n "You failed the quiz. Better luck next time!"
     python:
