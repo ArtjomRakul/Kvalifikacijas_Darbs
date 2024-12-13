@@ -1,7 +1,7 @@
 init python:
     import random
 
-    # Function to determine the winner of a single attempt
+    # Function to determine the winner of a single attempt based on choices
     def determine_winner(player_choice, bully_choice):
         if player_choice == bully_choice:
             return "draw"
@@ -14,6 +14,7 @@ init python:
         else:
             return "bully"
 
+# Label to start the rock-paper-scissors mini-game
 label rock_paper_scissors_game:
     with fade
     show mainCharacter at left2
@@ -38,6 +39,7 @@ label rock_paper_scissors_game:
 
             "Round [rounds_played + 1] begins!"
 
+            # Play attempts in the current round until someone wins 2 attempts or attempts are exhausted
             while attempts < max_attempts and player_wins < 2 and bully_wins < 2:
                 menu:
                     "Rock":
@@ -81,11 +83,11 @@ label rock_paper_scissors_game:
             $ rounds_played += 1
             "End of Round [rounds_played]. Overall Score: You - [player_score], Bully - [bully_score]."
 
-        # Check the result of the game
+        # Check the result of the game after all rounds
         if player_score > bully_score:
             "Congratulations! You won the rock-paper-scissors game with an overall score of [player_score] to [bully_score]!"
-            b "Ладно, на этот раз тебе повезло"
-            b "Вот твои записи. Забирай и уходи"
+            b "Well, you're lucky this time"
+            b "Here are your notes. Take it and go"
             $ remove_task("Take your sister's notes away from the bully")
             $ add_task("Bring the notes to your sister")
             jump mainSchoolLoop
