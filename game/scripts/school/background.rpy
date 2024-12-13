@@ -1,10 +1,4 @@
 init python:
-    # Function to change the player's current room with a transition effect
-    def change_school_room(new_location):
-        global current_location
-        current_location = new_location
-        update_background(transition=dissolve)
-
     # Function to update the background based on the player's current room and time of day
     def update_background(transition=None):
         # Hide all backgrounds first
