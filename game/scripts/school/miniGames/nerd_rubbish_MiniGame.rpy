@@ -101,14 +101,14 @@ label mini_game_end:
     $ update_background()
     show nerd at right2
     show mainCharacter at left2
-    n "Молодец! Ты хорошо справился!"
-    n "Ты наверно сильно устал?"
-    p "Да, немного..."
-    n "Не удивительно. Уборка - это тяжелый труд."
-    n "Но ты молодец, что справился с ней!"
-    n "Ты заслуживаешь награду!"
-    n "Вот мои обещанные записи! Удачи подготовиться к контрольной!"
-    p "Спасибо!"
+    n "Well done! You did good!"
+    n "You must be pretty tired, huh?"
+    p "Yeah, a little bit..."
+    n "No wonder. Cleaning is hard work."
+    n "But good for you for handling it!"
+    n "You deserve an award!"
+    n "Here are my promised notes! Good luck studying for the test!"
+    p "Thank you!"
     # Add a reward to the inventory if not already present
     if "BookBlue" not in [item[0] for item in inventory_items if item]:
         $ add_to_inventory(*notes_items["BookBlue"])
