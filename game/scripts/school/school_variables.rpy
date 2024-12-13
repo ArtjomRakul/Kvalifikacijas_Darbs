@@ -1,4 +1,4 @@
-# Define images for characters and items
+# Define the images for the characters, resizing them to 750x750 pixels for consistency
 image sister_young = im.Scale("images/characters/sister_young.png", 750, 750)
 image nerd = im.Scale("images/characters/nerd.png", 750, 750)
 image old_friend = im.Scale("images/characters/old_friend.png", 750, 750)
@@ -7,8 +7,9 @@ image ArtTeacher = im.Scale("images/characters/teacher_art.png", 750, 750)
 image MusicTeacher = im.Scale("images/characters/teacher_music.png", 750, 750)
 image ClassTeacher = im.Scale("images/characters/teacher_class.png", 750, 750)
 
-# Define variables for character interactions
-default sister_interaction = 0  # Starts at 0, incremented as interactions occur
+# Define variables to track interactions with characters
+# These variables will increment based on player actions during the game
+default sister_interaction = 0 
 default art_teacher_interaction = 0
 default music_teacher_interaction = 0
 default class_teacher_interaction = 0
@@ -21,29 +22,33 @@ default time_of_day = "morning"
 default current_location = "hallway11"
 default inventory_items = [None] * 10  # Inventory with 10 empty slots
 default bully_confronted = False
+# Define dictionary to map item names to their properties (name and image)
 define notes_items = {
     "BookGreen": ("BookGreen", im.Scale("images/items/ctg_MiniGame/cottage_items/BookGreen.png", 100, 100)),
     "BookBlue": ("BookBlue", im.Scale("images/items/ctg_MiniGame/cottage_items/BookBlue.png", 100, 100)),
     "BookBrown": ("BookBrown", im.Scale("images/items/ctg_MiniGame/cottage_items/BookBrown.png", 100, 100))
 }
-
+# Define dictionary for potion ingredients with their properties
 define potion_ingredients = {
     "FruitGreen" : ("FruitGreen", im.Scale("images/items/ctg_MiniGame/FruitGreen.png", 100, 100)),
     "RoseWhite" : ("RoseWhite", im.Scale("images/items/potion_ingredients/RoseWhite.png", 100, 100)),
     "PotionGreenBlue" : ("PotionGreenBlue", im.Scale("images/items/potion_ingredients/PotionGreenBlue.png", 100, 100))
 }
 
+# Define the required items for mini-games
 define required_books = {"BookGreen", "BookBlue", "BookBrown"}
 define required_potion_ingredients = {"FruitGreen", "RoseWhite", "PotionGreenBlue"}
 
+# Track boolean flags for specific game events
 $ sister_coin_started = False
 $ nerdQuizWin = False
 $ goForAWalk = False
 
 init python:
-    # Define visibility conditions for locations
+    # Define conditions for room visibility
+    # Each lambda function determines whether the room is accessible to the player
     location_conditions = {
-        "hallway11": lambda: True,
+        "hallway11": lambda: True,  # Always accessible
         "classroom11": lambda: True,
         "hallway12": lambda: True,
         "classroom12": lambda: True,
@@ -53,7 +58,8 @@ init python:
         "roof": lambda: True,
     }
 
-    # Define navigation positions for each room
+    # Determine the position of the navigation buttons for each room
+    # Each entry specifies the direction of movement (left, right, up, down) and the coordinates of the buttons
     navigation_positions = {
         "classroom11": {"right": ("hallway11", 1450, 400)},
         "hallway11": {"left": ("classroom11", 300, 500), "up": ("hallway12", 950, 300)},
@@ -68,7 +74,8 @@ init python:
         "roof": {"down": ("hallway21", 930, 500)},
     }
 
-    # Define characters with location, time, position, and label for dialogue
+    # Determine the presence of characters in certain rooms based on the time of day
+    # Each entry includes the room, time, character position and dialog label
     characters_in_rooms = {
         ("classroom11", "morning"): [
             ("Sister", "images/characters/sister_young.png", 1300, 480, "sister_dialogue"),

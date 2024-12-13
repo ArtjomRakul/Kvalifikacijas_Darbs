@@ -1,4 +1,5 @@
 # Define variables for character relationships
+# These variables will increment based on player actions during the game
 default relationship_wiseMan = 0 
 default relationship_sister = 0 
 default sister_relationship = 0 
@@ -7,6 +8,7 @@ default old_friend_relationship = 0
 default overall_relationships = 0 
 
 init python:
+    # Function to get the relationship status as a text based on the score
     def get_relationship_status(score):
         if score > 0:
             return "Positive (+[score])" 
@@ -21,18 +23,18 @@ screen relationships_button():
 
 # Screen to display relationship statuses
 screen relationships_screen():
-    tag menu
-    modal True
+    tag menu    # Identifies this screen as a menu-type screen
+    modal True  # Prevent interaction with other game elements while this screen is open
 
     frame:
-        style_prefix "relationship"
-        xalign 0.5
-        yalign 0.5
-        padding (20, 20, 20, 20)
+        style_prefix "relationship" # Use a style prefix for consistent styling
+        xalign 0.5  # Center the frame horizontally
+        yalign 0.5  # Center the frame vertically
+        padding (20, 20, 20, 20)    # Add padding inside the frame
         background "#222222"
 
         vbox:
-            spacing 15
+            spacing 15  # Add space between each element in the vertical box layout
             text "Relationships" style "relationship_title"
 
             # Display each character's relationship status
@@ -40,5 +42,5 @@ screen relationships_screen():
             text "Music Teacher: [get_relationship_status(music_teacher_relationship)]" style "relationship_item"
             text "Old Friend: [get_relationship_status(old_friend_relationship)]" style "relationship_item"
 
-            # Close button
+            # Close button to exit the relationships screen
             textbutton "Close" action Hide("relationships_screen")
