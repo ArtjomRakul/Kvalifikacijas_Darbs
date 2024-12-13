@@ -1,6 +1,7 @@
 
-# Item and character definitions with their display conditions
+# Define item and character display conditions, as well as utility functions for screen visibility
 init python:
+    # Function to hide all interactive screens
     def hide_screens():
         renpy.hide_screen("time_buttons")
         renpy.hide_screen("navigation_arrows")
@@ -9,6 +10,7 @@ init python:
         renpy.hide_screen("tasks_button")
         renpy.hide_screen("relationships_button")
 
+    # Function to show all interactive screens
     def show_screens():
         renpy.show_screen("time_buttons")
         renpy.show_screen("navigation_arrows")
@@ -17,25 +19,25 @@ init python:
         renpy.show_screen("tasks_button")
         renpy.show_screen("relationships_button")
 
-    # Function to change rooms with a transition effect
+    # Function to change the player's current room with a transition effect
     def change_school_room(new_location):
         global current_location
         current_location = new_location
         update_background(transition=dissolve)
 
-    # Function to update background based on room and time of day
+    # Function to update the background based on the player's current room and time of day
     def update_background(transition=None):
-        # Hide all backgrounds before showing the current one
+        # Hide all backgrounds first
         for location in navigation_positions:
             for time in ["morning", "afternoon", "evening"]:
                 renpy.hide(f"{location}_{time}")
         
-        # Show the new background with a transition
+        # Show the background for the current location and time of day
         if transition:
-            renpy.transition(transition)  # Queue the transition correctly
+            renpy.transition(transition)  # Apply the transition effect
         renpy.show(f"{current_location}_{time_of_day}")
 
-    # Function to advance time of day
+    # Function to advance the in-game time of day
     def advance_time():
         global time_of_day
         time_of_day = {"morning": "afternoon", "afternoon": "evening", "evening": "morning"}[time_of_day]
@@ -45,11 +47,12 @@ init python:
     def start_dialogue(label):
         renpy.call(label)
 
-# Screens for time-of-day management
+# Screen for managing time of day with interactive buttons
 screen time_buttons():
     hbox:
         xalign 0.85
         yalign 0.03
+        # Display a button for the current time of day, allowing the player to advance time
         if time_of_day == "morning":
             textbutton "Morning" action Function(advance_time) background "#ffff88"
         elif time_of_day == "afternoon":
@@ -57,12 +60,15 @@ screen time_buttons():
         elif time_of_day == "evening":
             textbutton "Evening" action Function(advance_time) background "#ffff88"
 
+# Screen for room navigation using directional arrows
 screen navigation_arrows():
+    # Check if the current location has navigation options
     if current_location in navigation_positions:
         for direction, (target_room, xpos, ypos) in navigation_positions[current_location].items():
-            # Check if the target room is visible based on its condition
+            # Ensure the target room is visible based on its condition
             if location_conditions.get(target_room, lambda: True)():
                 imagebutton:
+                    # Display navigation arrows based on direction
                     idle im.Scale({
                         "left": "images/navigation_arrows/arrow_left.png",
                         "right": "images/navigation_arrows/arrow_right.png",
@@ -73,14 +79,17 @@ screen navigation_arrows():
                     ypos ypos
                     action Function(change_school_room, target_room)
 
-# Screen for displaying clickable characters in rooms
+# Screen for displaying interactive characters in rooms
 screen room_characters():
+    # Check if there are characters in the current location at the current time of day
     if (current_location, time_of_day) in characters_in_rooms:
         for char_name, char_image, xpos, ypos, dialogue_label in characters_in_rooms[(current_location, time_of_day)]:
             imagebutton:
-                idle im.Scale(char_image, 500, 500)  # Adjust character size as needed
+            # Display the character's image at the specified position
+                idle im.Scale(char_image, 500, 500) 
                 xpos xpos
                 ypos ypos
+                # Start dialogue when the character is clicked
                 action Function(start_dialogue, dialogue_label)
 
 # Main game loop
