@@ -29,8 +29,8 @@ label music_teacher_dialogue:
         p "Okay..."
         hide MusicTeacher
         hide mainCharacter
-        $ current_location = "hallway13"
-        $ update_background()
+        $ current_location = "hallway13" # Update current location
+        $ update_background() 
         with fade
         "You walk out into the hallway and you meet a bully. He comes up to you."
         show bully at center
@@ -70,6 +70,7 @@ label music_teacher_dialogue:
         show MusicTeacher at right2
         show mainCharacter at left2
         mteacher "Did you want something?"
+        # Display dialogue options
         menu:
             "Apologize for my impertinence":
                 $ music_teacher_relationship += 1

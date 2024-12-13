@@ -1,4 +1,3 @@
-# Declare all default variables at the top of the script
 default quiz_progress = "math"  # Tracks which quiz is next: math, music, drawing
 default quiz_teachers_time_left = 15.0
 default quiz_teachers_timer_active = False
@@ -45,6 +44,7 @@ define drawing_quiz_questions = [
 
 # Main label for starting the quiz
 label start_teachers_quiz:
+    # Determine which quiz to start based on quiz_progress
     if quiz_progress == "math":
         jump math_quiz_start
     elif quiz_progress == "music":
@@ -53,15 +53,14 @@ label start_teachers_quiz:
         jump drawing_quiz_start
     return
 
-# Math Quiz
+# Labels for starting each specific quiz
 label math_quiz_start:
     $ quiz_progress = "math"
     python:
         import random
-        random.shuffle(math_quiz_questions)
+        random.shuffle(math_quiz_questions)   # Randomize the order of questions
     jump quiz_teachers_loop
 
-# Music Quiz
 label music_quiz_start:
     $ quiz_progress = "music"
     python:
@@ -69,7 +68,6 @@ label music_quiz_start:
         random.shuffle(music_quiz_questions)
     jump quiz_teachers_loop
 
-# Drawing Quiz
 label drawing_quiz_start:
     $ quiz_progress = "drawing"
     python:
@@ -77,8 +75,9 @@ label drawing_quiz_start:
         random.shuffle(drawing_quiz_questions)
     jump quiz_teachers_loop
 
-# Quiz Loop
+# Main loop for presenting quiz questions
 label quiz_teachers_loop:
+    # Load the current question and progress for the active quiz
     if quiz_progress == "math" and math_quiz_question_index < math_quiz_total_questions:
         $ current_question = math_quiz_questions[math_quiz_question_index]
         $ quiz_score = math_quiz_score
@@ -89,8 +88,9 @@ label quiz_teachers_loop:
         $ current_question = drawing_quiz_questions[drawing_quiz_question_index]
         $ quiz_score = drawing_quiz_score
     else:
-        jump quiz_teachers_result
+        jump quiz_teachers_result   # Jump to the result screen if all questions are answered
 
+    # Prepare question data for display
     $ quiz_question_text = current_question["question"]
     $ quiz_options = current_question["options"]
     $ quiz_correct_option = current_question["answer"]
@@ -99,6 +99,7 @@ label quiz_teachers_loop:
 
     call screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option)
 
+# Handle timeout when the player doesn't answer in time
 label quiz_teachers_timeout:
     if quiz_progress == "math":
         $ math_quiz_question_index += 1
@@ -106,8 +107,9 @@ label quiz_teachers_timeout:
         $ music_quiz_question_index += 1
     elif quiz_progress == "drawing":
         $ drawing_quiz_question_index += 1
-    jump quiz_teachers_loop
+    jump quiz_teachers_loop     # Move to the next question
 
+# Display results and handle the next steps
 label quiz_teachers_result:
     if quiz_progress == "math" and math_quiz_score >= 150:
         $ add_to_inventory(*potion_ingredients["FruitGreen"])
@@ -132,7 +134,7 @@ label quiz_teachers_result:
         jump mainSchoolLoop
     else:
         n "You failed the quiz. Try again!"
-        # Reset quiz progress for the current quiz
+        # Resetting test results for retry
         if quiz_progress == "math":
             $ math_quiz_question_index = 0
             $ math_quiz_score = 0
@@ -146,8 +148,7 @@ label quiz_teachers_result:
             $ drawing_quiz_score = 0
             jump drawing_quiz_start
 
-
-# Screens
+# Display the current score during the quiz
 screen quiz_score_display(quiz_score):
     frame:
         align (0.5, 0.05)
@@ -155,6 +156,7 @@ screen quiz_score_display(quiz_score):
         padding (10, 5)
         text "Score: [quiz_score]" size 20
 
+# Display quiz questions and options with a timer
 screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option):
     modal True
     frame:
@@ -162,25 +164,30 @@ screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option):
         vbox:
             spacing 10
             text quiz_question_text size 30
+            # Display options
             for i, option in enumerate(quiz_options):
                 textbutton option:
                     action Function(handle_teachers_answer, i, quiz_correct_option)
+            # Display timer bar
             bar value AnimatedValue(quiz_teachers_time_left / 15.0) range 1.0:
                 xsize 300 ysize 20
-                left_bar "#00FF00"
-                right_bar "#FF0000"
+                left_bar "#00FF00"  # Green bar for time remaining
+                right_bar "#FF0000" # Red bar for elapsed time
             text f"Time left: {quiz_teachers_time_left:.1f}" size 20 color "#FF0000" align (0.5, 0.5)
+    # Timer countdown
     timer 0.1 repeat True action Function(update_timer)
 
-# Functions
+# Timer and answer handling functions
 init python:
+    # Function to update the timer
     def update_timer():
         if store.quiz_teachers_timer_active:
             store.quiz_teachers_time_left -= 0.1
             if store.quiz_teachers_time_left <= 0:
                 store.quiz_teachers_timer_active = False
-                renpy.jump("quiz_teachers_timeout")
+                renpy.jump("quiz_teachers_timeout") # Trigger timeout handling
 
+    # Function to handle selected answers
     def handle_teachers_answer(selected_option, correct_option):
         store.quiz_teachers_timer_active = False
         if selected_option == correct_option:
@@ -196,4 +203,4 @@ init python:
             store.music_quiz_question_index += 1
         elif store.quiz_progress == "drawing":
             store.drawing_quiz_question_index += 1
-        renpy.jump("quiz_teachers_loop")
+        renpy.jump("quiz_teachers_loop")    # Move to the next question
