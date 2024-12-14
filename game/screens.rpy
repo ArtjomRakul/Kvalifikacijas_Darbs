@@ -28,7 +28,7 @@ screen navigation_arrows():
                     }.get(direction, "images/navigation_arrows/arrow_right.png"), 75, 75)
                     xpos xpos
                     ypos ypos
-                    action Function(change_school_room, target_room)
+                    action Function(update_background, target_room)
 
 # Screen for displaying interactive characters in rooms
 screen room_characters():
@@ -229,12 +229,18 @@ screen witch_minigame_screen(statement, correct_answer):
 
         # True Button
         textbutton "True":
-            action Function(handle_answer, True, correct_answer)
+            action [
+                Function(update_score_and_index, True, correct_answer),
+                Function(check_next_question_or_end)
+            ]
             style "true_button"
 
         # False Button
         textbutton "False":
-            action Function(handle_answer, False, correct_answer)
+            action [
+                Function(update_score_and_index, False, correct_answer),
+                Function(check_next_question_or_end)
+            ]
             style "false_button"
 
 # Define custom styles for the True and False buttons

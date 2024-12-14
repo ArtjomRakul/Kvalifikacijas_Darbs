@@ -36,12 +36,12 @@ init python:
 # Functions for the mini-game logic
 init python:
     # Function to mark an item as collected
-    def collect_garbage(room, item):
+    def collect_garbage(room, item):    # NR01
         # Add the collected item to the persistent dictionary
         persistent.garbage_collected[(room, item)] = True
 
     # Function to move to the next room
-    def next_room():
+    def next_room():    # NR02
         global current_room, collected_garbage
         if current_room < total_rooms:
             current_room += 1

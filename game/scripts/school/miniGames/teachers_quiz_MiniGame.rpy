@@ -56,23 +56,23 @@ label start_teachers_quiz:
 # Labels for starting each specific quiz
 label math_quiz_start:
     $ quiz_progress = "math"
+    # Shuffle questions
     python:
-        import random
-        random.shuffle(math_quiz_questions)   # Randomize the order of questions
+        shuffle_questions(math_quiz_questions)
     jump quiz_teachers_loop
 
 label music_quiz_start:
     $ quiz_progress = "music"
+    # Shuffle questions
     python:
-        import random
-        random.shuffle(music_quiz_questions)
+        shuffle_questions(music_quiz_questions)
     jump quiz_teachers_loop
 
 label drawing_quiz_start:
     $ quiz_progress = "drawing"
+    # Shuffle questions
     python:
-        import random
-        random.shuffle(drawing_quiz_questions)
+        shuffle_questions(drawing_quiz_questions)
     jump quiz_teachers_loop
 
 # Main loop for presenting quiz questions
@@ -180,7 +180,7 @@ screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option):
 # Timer and answer handling functions
 init python:
     # Function to update the timer
-    def update_timer():
+    def update_timer(): # TCHR01
         if store.quiz_teachers_timer_active:
             store.quiz_teachers_time_left -= 0.1
             if store.quiz_teachers_time_left <= 0:
@@ -188,7 +188,7 @@ init python:
                 renpy.jump("quiz_teachers_timeout") # Trigger timeout handling
 
     # Function to handle selected answers
-    def handle_teachers_answer(selected_option, correct_option):
+    def handle_teachers_answer(selected_option, correct_option): # TCHR02
         store.quiz_teachers_timer_active = False
         if selected_option == correct_option:
             if store.quiz_progress == "math":

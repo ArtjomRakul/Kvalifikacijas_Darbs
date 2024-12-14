@@ -9,7 +9,7 @@ default overall_relationships = 0
 
 init python:
     # Function to get the relationship status as a text based on the score
-    def get_relationship_status(score):
+    def get_relationship_status(score): # RLTS01
         if score > 0:
             return "Positive (+[score])" 
         elif score < 0:

@@ -2,7 +2,7 @@ init python:
     import random
 
     # Function to determine the winner of a single attempt based on choices
-    def determine_winner(player_choice, bully_choice):
+    def determine_winner(player_choice, bully_choice):  # BM01
         if player_choice == bully_choice:
             return "draw"
         elif (

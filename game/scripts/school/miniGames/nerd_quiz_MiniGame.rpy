@@ -3,6 +3,28 @@ define coin_items = {
     "CoinBronze": ("CoinBronze", im.Scale("images/items/ctg_MiniGame/CoinBronze.png", 100, 100))
 }
 
+init python:
+    # Function to shuffle questions
+    def shuffle_questions(questions): # NQ01
+        import random
+        random.shuffle(questions)
+
+    # Function to update the timer
+    def update_timer(): # NQ02
+        store.quiz_time_left -= 0.1
+        if store.quiz_time_left <= 0:
+            store.quiz_timer_active = False
+            # Trigger timeout handling
+            renpy.jump("quiz_timeout")
+
+    # Function to handle selected answers
+    def handle_quiz_answer(selected_option, correct_option):    # NQ03
+        store.quiz_timer_active = False
+        if selected_option == correct_option:
+            store.quiz_correct_answers += 1
+        store.quiz_question_index += 1
+        renpy.jump("quiz_loop")
+
 # Quiz Mini-Game with Timer
 label start_quiz:
     # Initialize variables
@@ -28,8 +50,7 @@ label start_quiz:
 
     # Shuffle questions
     python:
-        import random
-        random.shuffle(quiz_questions)
+        shuffle_questions(quiz_questions)
 
     # Start quiz loop
     jump quiz_loop
@@ -95,25 +116,7 @@ screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_su
                 right_bar "#FF0000"
             text f"Time left: {quiz_time_left:.1f} seconds" size 20 color "#FF0000" align (0.5, 0.5)
     # Timer countdown
-    timer 0.1 repeat True action Function(update_timer)
-
-# Timer and answer handling functions
-init python:
-    # Function to update the timer
-    def update_timer():
-        store.quiz_time_left -= 0.1
-        if store.quiz_time_left <= 0:
-            store.quiz_timer_active = False
-            # Trigger timeout handling
-            renpy.jump("quiz_timeout")
-
-    # Function to handle selected answers
-    def handle_quiz_answer(selected_option, correct_option):
-        store.quiz_timer_active = False
-        if selected_option == correct_option:
-            store.quiz_correct_answers += 1
-        store.quiz_question_index += 1
-        renpy.jump("quiz_loop")
+    timer 0.1 repeat True action Function(update_timer)   
 
 # Winning scenario
 label win_quiz:

@@ -51,7 +51,7 @@ label show_room:
 
 init python:
     # Function to change rooms
-    def change_room(direction):
+    def change_room(direction): # CTG01
         global current_room
         # Close any open screens before changing the room
         renpy.hide_screen("inventory_screen_ctg")
@@ -63,7 +63,7 @@ init python:
         renpy.call("show_room")
 
     # Function to pick up an item in a room
-    def pick_item(room_name, item_name):
+    def pick_item(room_name, item_name):    # CTG02
         global riddle_started
         if item_name == "Paper":
             riddle_started = True
@@ -81,7 +81,7 @@ init python:
         renpy.call("show_room")
 
     # Function to place a book in a puzzle slot
-    def set_puzzle_slot(index):
+    def set_puzzle_slot(index): # CTG03
         global selected_book, puzzle_slots, inventory
         # Check if a book is selected
         if selected_book is not None:
@@ -91,7 +91,7 @@ init python:
             selected_book = None 
     
     # Function to check if the puzzle solution is correct
-    def check_puzzle_solution():
+    def check_puzzle_solution():    # CTG04
         if puzzle_slots == ["BookBrown", "BookBlue", "BookGreen"]:
             renpy.hide_screen("final_puzzle")
             global puzzle_completed
