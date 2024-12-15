@@ -120,11 +120,13 @@ screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_su
 
 # Winning scenario
 label win_quiz:
-    n "You passed the quiz! Congratulations!"
-    $ nerdQuizWin = True
     python:
+        renpy.sound.play(success) # Play the success sound effect
         # Add Silver Coin to inventory
         add_to_inventory(*coin_items["CoinSilver"])
+
+    n "You passed the quiz! Congratulations!"
+    $ nerdQuizWin = True
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
     show screen custom_notify("Bring the coin to your sister")
@@ -132,10 +134,10 @@ label win_quiz:
 
 # Losing scenario
 label lose_quiz:
-    n "You failed the quiz. Better luck next time!"
     python:
-        # Add Bronze Coin to inventory
-        add_to_inventory(*coin_items["CoinBronze"])
+        renpy.sound.play(fail) # Play the fail sound effect
+        add_to_inventory(*coin_items["CoinBronze"]) # Add Bronze Coin to inventory
+    n "You failed the quiz. Better luck next time!"
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
     show screen custom_notify("Bring the coin to your sister")

@@ -48,6 +48,8 @@ label rock_paper_scissors_game:
                         $ player_choice = "paper"
                     "Scissors":
                         $ player_choice = "scissors"
+                python:
+                    renpy.sound.play(switch) # Play the switch sound effect
 
                 # Computer(bully) randomly selects its choice
                 $ bully_choice = random.choice(choices)
@@ -85,6 +87,8 @@ label rock_paper_scissors_game:
 
         # Check the result of the game after all rounds
         if player_score > bully_score:
+            python:
+                renpy.sound.play(success) # Play the success sound effect
             "Congratulations! You won the rock-paper-scissors game with an overall score of [player_score] to [bully_score]!"
             b "Well, you're lucky this time"
             b "Here are your notes. Take it and go"
@@ -92,4 +96,6 @@ label rock_paper_scissors_game:
             $ add_task("Bring the notes to your sister")
             jump mainSchoolLoop
         else:
+            python:
+                renpy.sound.play(fail) # Play the fail sound effect
             "The bully has defeated you. You'll have to try again!"

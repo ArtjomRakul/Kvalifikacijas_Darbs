@@ -13,10 +13,9 @@ init python:
     {"statement": "Fear is just a feeling that can be overcome.", "truth": True}
 ]
 
-# Functions to handle answer and track score
-init python:
     # Function to update the player's score and increments the question index.
     def update_score_and_index(player_answer, correct_answer):  # WTCH01
+        renpy.sound.play(click) # Play a sound effect
         global correct_answers, question_index
         if player_answer == correct_answer:
             correct_answers += 1

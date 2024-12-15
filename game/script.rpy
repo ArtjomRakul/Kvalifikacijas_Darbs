@@ -53,7 +53,17 @@ default overcoming_fears = 0
 default liar = False 
 default realLetter = True 
 default helpSister = False
- 
+
+# Declare music and sound channels
+# Ren'Py automatically creates two channels: music (for background music) and sound (for sound effects)
+define config.has_sound = True
+define config.has_music = True
+
+define click = "sounds/click2.ogg"
+define switch = "sounds/switch2.ogg"
+define success = "sounds/game/sounds/jingles_STEEL04.ogg."
+define fail = "sounds/game/sounds/jingles_STEEL05.ogg."
+
 # Start of the game 
 label start: 
     # A background image of the field with a blackout effect is shown 

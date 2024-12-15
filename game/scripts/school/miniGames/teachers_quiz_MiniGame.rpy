@@ -112,6 +112,8 @@ label quiz_teachers_timeout:
 # Display results and handle the next steps
 label quiz_teachers_result:
     if quiz_progress == "math" and math_quiz_score >= 150:
+        python:
+            renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["FruitGreen"])
         show screen custom_notify("Come to the music teacher")
         $ quiz_progress = "music"
@@ -119,13 +121,19 @@ label quiz_teachers_result:
         $ add_task("Come to the music teacher")
         jump mainSchoolLoop
     elif quiz_progress == "music" and music_quiz_score >= 150:
+        python:
+            renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["RoseWhite"])
         show screen custom_notify("Come to the art teacher")
         $ quiz_progress = "drawing"
         $ remove_task("Come to the music teacher")
         $ add_task("Come to the art teacher")
         jump mainSchoolLoop
+        python:
+            renpy.sound.play(success)
     elif quiz_progress == "drawing" and drawing_quiz_score >= 150:
+        python:
+            renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["PotionGreenBlue"])
         show screen custom_notify("Brew a potion")
         $ quiz_progress = "done"
@@ -136,14 +144,20 @@ label quiz_teachers_result:
         n "You failed the quiz. Try again!"
         # Resetting test results for retry
         if quiz_progress == "math":
+            python:
+                renpy.sound.play(fail)
             $ math_quiz_question_index = 0
             $ math_quiz_score = 0
             jump math_quiz_start
         elif quiz_progress == "music":
+            python:
+                renpy.sound.play(fail)
             $ music_quiz_question_index = 0
             $ music_quiz_score = 0
             jump music_quiz_start
         elif quiz_progress == "drawing":
+            python:
+                renpy.sound.play(fail)
             $ drawing_quiz_question_index = 0
             $ drawing_quiz_score = 0
             jump drawing_quiz_start
@@ -189,6 +203,7 @@ init python:
 
     # Function to handle selected answers
     def handle_teachers_answer(selected_option, correct_option): # TCHR02
+        renpy.sound.play(switch) # Play the switch sound effect
         store.quiz_teachers_timer_active = False
         if selected_option == correct_option:
             if store.quiz_progress == "math":

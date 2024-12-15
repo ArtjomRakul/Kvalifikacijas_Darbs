@@ -52,6 +52,7 @@ label show_room:
 init python:
     # Function to change rooms
     def change_room(direction): # CTG01
+        renpy.sound.play(click)  # Play the click sound effect
         global current_room
         # Close any open screens before changing the room
         renpy.hide_screen("inventory_screen_ctg")
@@ -66,17 +67,20 @@ init python:
     def pick_item(room_name, item_name):    # CTG02
         global riddle_started
         if item_name == "Paper":
+            renpy.sound.play(success) # Play the success sound effect
             riddle_started = True
             renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
             # Remove the paper from the room's items
             room_items[room_name] = [item for item in room_items[room_name] if item[0] != "Paper"]
         elif "Book" in item_name:
             if item_name not in inventory:
+                renpy.sound.play(success) # Play the success sound effect
                 inventory.append(item_name)
                 renpy.notify("You may find this book helpful.")
                 # Remove the book from the room's items
                 room_items[room_name] = [item for item in room_items[room_name] if item[0] != item_name]
         else:
+            renpy.sound.play(fail) # Play the fail sound effect
             renpy.notify("This item has nothing to do with the riddle.")
         renpy.call("show_room")
 
@@ -93,11 +97,13 @@ init python:
     # Function to check if the puzzle solution is correct
     def check_puzzle_solution():    # CTG04
         if puzzle_slots == ["BookBrown", "BookBlue", "BookGreen"]:
+            renpy.sound.play(success) # Play the success sound effect
             renpy.hide_screen("final_puzzle")
             global puzzle_completed
             puzzle_completed = True
             renpy.jump("puzzle_completed")
         else:
+            renpy.sound.play(fail) # Play the fail sound effect
             renpy.notify("The order is incorrect. Try again.")
             renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
             # Return books to the inventory and reset slots

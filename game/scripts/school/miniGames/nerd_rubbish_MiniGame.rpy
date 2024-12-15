@@ -37,11 +37,13 @@ init python:
 init python:
     # Function to mark an item as collected
     def collect_garbage(room, item):    # NR01
+        renpy.sound.play(switch) # Play the switch sound effect
         # Add the collected item to the persistent dictionary
         persistent.garbage_collected[(room, item)] = True
 
     # Function to move to the next room
     def next_room():    # NR02
+        renpy.sound.play(click) # Play the click sound effect
         global current_room, collected_garbage
         if current_room < total_rooms:
             current_room += 1
