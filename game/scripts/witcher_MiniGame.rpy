@@ -13,22 +13,21 @@ init python:
     {"statement": "Fear is just a feeling that can be overcome.", "truth": True}
 ]
 
-    # Function to update the player's score and increments the question index.
-    def update_score_and_index(player_answer, correct_answer):  # WTCH01
-        renpy.sound.play(click) # Play a sound effect
+# Function to handle answer and track score
+init python:
+    def handle_answer(player_answer, correct_answer):   # WTCH01
         global correct_answers, question_index
         if player_answer == correct_answer:
             correct_answers += 1
         question_index += 1
 
-    # Function to check if there are more questions to display.
-    def check_next_question_or_end():  # WTCH02
+        # Check if there are more questions or end the game
         if question_index < len(witch_statements):
             statement = witch_statements[question_index]["statement"]
             correct_answer = witch_statements[question_index]["truth"]
             renpy.show_screen("witch_minigame_screen", statement=statement, correct_answer=correct_answer)
         else:
-            renpy.jump("witch_minigame_end")  # Jump to end of mini-game
+            renpy.jump("witch_minigame_end")  # Use jump to go directly to end
 
 # Start of the mini-game label
 label witch_minigame:

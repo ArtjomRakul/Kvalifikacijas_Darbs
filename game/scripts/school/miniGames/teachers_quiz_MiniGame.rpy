@@ -1,6 +1,5 @@
 default quiz_progress = "math"  # Tracks which quiz is next: math, music, drawing
-default quiz_teachers_time_left = 15.0
-default quiz_teachers_timer_active = False
+default quiz_teachers_started = False
 
 # Math Quiz Variables
 default math_quiz_total_questions = 5
@@ -94,8 +93,8 @@ label quiz_teachers_loop:
     $ quiz_question_text = current_question["question"]
     $ quiz_options = current_question["options"]
     $ quiz_correct_option = current_question["answer"]
-    $ quiz_teachers_time_left = 15.0
-    $ quiz_teachers_timer_active = True
+    $ quiz_time_left = 15.0
+    $ quiz_timer_active = True
 
     call screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option)
 
@@ -183,28 +182,20 @@ screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option):
                 textbutton option:
                     action Function(handle_teachers_answer, i, quiz_correct_option)
             # Display timer bar
-            bar value AnimatedValue(quiz_teachers_time_left / 15.0) range 1.0:
+            bar value AnimatedValue(quiz_time_left / 15.0) range 1.0:
                 xsize 300 ysize 20
                 left_bar "#00FF00"  # Green bar for time remaining
                 right_bar "#FF0000" # Red bar for elapsed time
-            text f"Time left: {quiz_teachers_time_left:.1f}" size 20 color "#FF0000" align (0.5, 0.5)
+            text f"Time left: {quiz_time_left:.1f}" size 20 color "#FF0000" align (0.5, 0.5)
     # Timer countdown
     timer 0.1 repeat True action Function(update_timer)
 
 # Timer and answer handling functions
 init python:
-    # Function to update the timer
-    def update_timer(): # TCHR01
-        if store.quiz_teachers_timer_active:
-            store.quiz_teachers_time_left -= 0.1
-            if store.quiz_teachers_time_left <= 0:
-                store.quiz_teachers_timer_active = False
-                renpy.jump("quiz_teachers_timeout") # Trigger timeout handling
-
     # Function to handle selected answers
-    def handle_teachers_answer(selected_option, correct_option): # TCHR02
+    def handle_teachers_answer(selected_option, correct_option): # TCHR01
         renpy.sound.play(switch) # Play the switch sound effect
-        store.quiz_teachers_timer_active = False
+        store.quiz_timer_active = False
         if selected_option == correct_option:
             if store.quiz_progress == "math":
                 store.math_quiz_score += 50

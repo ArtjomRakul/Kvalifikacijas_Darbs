@@ -3,6 +3,8 @@ define coin_items = {
     "CoinBronze": ("CoinBronze", im.Scale("images/items/ctg_MiniGame/CoinBronze.png", 100, 100))
 }
 
+default quiz_nerd_started = False
+
 init python:
     # Function to shuffle questions
     def shuffle_questions(questions): # NQ01
@@ -11,11 +13,14 @@ init python:
 
     # Function to update the timer
     def update_timer(): # NQ02
-        store.quiz_time_left -= 0.1
-        if store.quiz_time_left <= 0:
-            store.quiz_timer_active = False
-            # Trigger timeout handling
-            renpy.jump("quiz_timeout")
+        if store.quiz_timer_active:
+            store.quiz_time_left -= 0.1
+            if store.quiz_time_left <= 0:
+                store.quiz_timer_active = False
+                if quiz_nerd_started:
+                    renpy.jump("quiz_timeout")  # Trigger timeout handling
+                elif quiz_teachers_started:
+                    renpy.jump("quiz_teachers_timeout") # Trigger timeout handling
 
     # Function to handle selected answers
     def handle_quiz_answer(selected_option, correct_option):    # NQ03
@@ -31,8 +36,9 @@ label start_quiz:
     default quiz_correct_answers = 0
     default quiz_total_questions = 10
     default quiz_question_index = 0
-    default quiz_time_left = 10.0
+    default quiz_time_left = 15.0
     default quiz_timer_active = False
+    default quiz_nerd_started = True
 
     # List of quiz questions with options and answers
     define quiz_questions = [
@@ -65,7 +71,7 @@ label quiz_loop:
         $ quiz_correct_option = current_question["answer"]
         $ quiz_subject = current_question["subject"]
         # Reset the timer for the new question
-        $ quiz_time_left = 10.0
+        $ quiz_time_left = 15.0
         $ quiz_timer_active = True
 
         # Show question screen
@@ -108,7 +114,7 @@ screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_su
                     # Handle answer selection
                     action Function(handle_quiz_answer, i, quiz_correct_option)
             # Display a progress bar for the timer
-            bar value AnimatedValue(quiz_time_left / 10.0) range 1.0:
+            bar value AnimatedValue(quiz_time_left / 15.0) range 1.0:
                 xsize 300 ysize 20
                 # Green bar for time remaining
                 left_bar "#00FF00"

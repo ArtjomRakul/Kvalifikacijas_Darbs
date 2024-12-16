@@ -1,7 +1,7 @@
 # Define item and character display conditions, as well as utility functions for screen visibility
 init python:
     # Function to hide all interactive screens
-    def hide_screens(): # TXT05
+    def hide_screens(): # TXT06
         renpy.hide_screen("time_buttons")
         renpy.hide_screen("navigation_arrows")
         renpy.hide_screen("inventory_icon")
@@ -10,7 +10,7 @@ init python:
         renpy.hide_screen("relationships_button")
 
     # Function to show all interactive screens
-    def show_screens(): # TXT06
+    def show_screens(): # TXT05
         renpy.show_screen("time_buttons")
         renpy.show_screen("navigation_arrows")
         renpy.show_screen("inventory_icon")
