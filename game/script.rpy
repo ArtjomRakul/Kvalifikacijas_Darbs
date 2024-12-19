@@ -1951,4 +1951,5 @@ label magicSchool:
     p "Well... Let's go!"
     "With a renewed sense of determination, you start walking towards the school, each step echoing in the strange, silent world."
     "The glowing plants illuminate your path, leading you towards the unknown, towards the memories that await within."
+    hide mainCharacter
     jump schoolMemories

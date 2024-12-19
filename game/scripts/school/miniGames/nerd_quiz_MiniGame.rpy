@@ -38,7 +38,7 @@ label start_quiz:
     default quiz_question_index = 0
     default quiz_time_left = 15.0
     default quiz_timer_active = False
-    default quiz_nerd_started = True
+    $ quiz_nerd_started = True
 
     # List of quiz questions with options and answers
     define quiz_questions = [
