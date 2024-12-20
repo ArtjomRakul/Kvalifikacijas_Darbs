@@ -121,4 +121,5 @@ label puzzle_completed:
     centered "With potion in hand, you exit the cottage, leaving its mysteries behind."
 
     # End the mini-game
+
     jump sisterMeeting

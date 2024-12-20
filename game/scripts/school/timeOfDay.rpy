@@ -28,7 +28,7 @@ label mainSchoolLoop:
     $ update_background()
     $ show_screens()
     while True:
-        if check_inventory_for_items(required_ingredients) == True:
+        if check_inventory_for_items(required_potion_ingredients) == True:
             $ hide_screens()
             jump endSchoolMemories
         pause

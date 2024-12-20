@@ -28,7 +28,7 @@ screen navigation_arrows():
                     }.get(direction, "images/navigation_arrows/arrow_right.png"), 75, 75)
                     xpos xpos
                     ypos ypos
-                    action Function(update_background, target_room)
+                    action Function(change_school_room, target_room)
 
 # Screen for displaying interactive characters in rooms
 screen room_characters():

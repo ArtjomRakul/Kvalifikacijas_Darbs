@@ -1,32 +1,83 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 193, in script
-    python:
-  File "renpy/common/00start.rpy", line 194, in <module>
-    renpy.execute_default_statement(True)
-  File "game/screens.rpy", line 521, in execute_default
-    default quick_menu = True
-Exception: store.quick_menu is being given a default a second time.
+  File "game/scripts/school/timeOfDay.rpy", line 34, in script
+    pause
+  File "renpy/common/000statements.rpy", line 462, in execute_pause
+    renpy.pause()
+  File "game/screens.rpy", line 15, in execute
+    screen navigation_arrows():
+  File "game/screens.rpy", line 15, in execute
+    screen navigation_arrows():
+  File "game/screens.rpy", line 17, in execute
+    if current_location in navigation_positions:
+  File "game/screens.rpy", line 18, in execute
+    for direction, (target_room, xpos, ypos) in navigation_positions[current_location].items():
+  File "game/screens.rpy", line 20, in execute
+    if location_conditions.get(target_room, lambda: True)():
+  File "game/screens.rpy", line 21, in execute
+    imagebutton:
+  File "game/screens.rpy", line 21, in keywords
+    imagebutton:
+  File "game/screens.rpy", line 31, in <module>
+    action Function(change_school_room, target_room)
+NameError: name 'change_school_room' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00start.rpy", line 193, in script
-    python:
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 821, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00start.rpy", line 194, in <module>
-    renpy.execute_default_statement(True)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\exports\statementexports.py", line 372, in execute_default_statement
-    i.execute_default(start)
-  File "game/screens.rpy", line 521, in execute_default
-    default quick_menu = True
-Exception: store.quick_menu is being given a default a second time.
+  File "game/scripts/school/timeOfDay.rpy", line 34, in script
+    pause
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1974, in execute
+    self.call("execute")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1953, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\statements.py", line 374, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 462, in execute_pause
+    renpy.pause()
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\exports\statementexports.py", line 194, in pause
+    rv = renpy.ui.interact(mouse='pause', type='pause', roll_forward=roll_forward, pause=delay, pause_modal=modal)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\core.py", line 2215, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\core.py", line 2745, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  [Previous line repeated 1 more time]
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\screen.py", line 480, in visit_all
+    callback(self)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\core.py", line 2745, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\screen.py", line 491, in per_interact
+    self.update()
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\screen.py", line 697, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 15, in execute
+    screen navigation_arrows():
+  File "game/screens.rpy", line 15, in execute
+    screen navigation_arrows():
+  File "game/screens.rpy", line 17, in execute
+    if current_location in navigation_positions:
+  File "game/screens.rpy", line 18, in execute
+    for direction, (target_room, xpos, ypos) in navigation_positions[current_location].items():
+  File "game/screens.rpy", line 20, in execute
+    if location_conditions.get(target_room, lambda: True)():
+  File "game/screens.rpy", line 21, in execute
+    imagebutton:
+  File "game/screens.rpy", line 21, in keywords
+    imagebutton:
+  File "game/screens.rpy", line 31, in <module>
+    action Function(change_school_room, target_room)
+NameError: name 'change_school_room' is not defined
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 A long way home 0.9
-Thu Dec 19 12:39:57 2024
+Thu Dec 19 23:02:47 2024
