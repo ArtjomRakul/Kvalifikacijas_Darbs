@@ -102,7 +102,7 @@ screen display_items(room_name):
         use inventory_icon_ctg
 
     # Display a button when the conditions for solving a puzzle are satisfied
-    if room_name == "library" and len([b for b in inventory if "Book" in b]) == 3 and not puzzle_completed:
+    if room_name == "library" and len([b for b in inventory if "Book" in b]) == 3 and not puzzle_completed and not puzzle_active:
         textbutton "Solve Puzzle":
             style "solve_puzzle_button"
             xpos 0.5 ypos 0.9
@@ -183,7 +183,7 @@ screen final_puzzle:
                     # Display the book placed in the slot
                     add im.Scale("images/items/ctg_MiniGame/{}.png".format(puzzle_slots[i]), 100, 100)
 
-        textbutton "Done" action Function(check_puzzle_solution)
+        textbutton "Submit" action Function(check_puzzle_solution)
 
 # A screen allowing selection of a book to be placed in the slot
 screen book_selection:
