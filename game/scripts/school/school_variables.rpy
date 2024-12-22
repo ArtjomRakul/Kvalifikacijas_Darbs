@@ -23,9 +23,9 @@ default current_location = "hallway11"
 default inventory_items = [None] * 10  # Inventory with 10 empty slots
 # Define dictionary to map item names to their properties (name and image)
 define notes_items = {
-    "BookGreen": ("BookGreen", im.Scale("images/items/ctg_MiniGame/cottage_items/BookGreen.png", 100, 100)),
-    "BookBlue": ("BookBlue", im.Scale("images/items/ctg_MiniGame/cottage_items/BookBlue.png", 100, 100)),
-    "BookBrown": ("BookBrown", im.Scale("images/items/ctg_MiniGame/cottage_items/BookBrown.png", 100, 100))
+    "BookGreen": ("BookGreen", im.Scale("images/items/ctg_MiniGame/BookGreen.png", 100, 100)),
+    "BookBlue": ("BookBlue", im.Scale("images/items/ctg_MiniGame/BookBlue.png", 100, 100)),
+    "BookBrown": ("BookBrown", im.Scale("images/items/ctg_MiniGame/BookBrown.png", 100, 100))
 }
 # Define dictionary for potion ingredients with their properties
 define potion_ingredients = {
@@ -69,7 +69,7 @@ init python:
         "classroom13": {"down": ("hallway13", 950, 900)},
         "club_entry": {"left": ("hallway13", 300, 500), "up": ("club", 950, 500), "right": ("roof", 1450, 500)},
         "club": {"right": ("club_entry", 1250, 500)},
-        "roof": {"down": ("culb_entry", 930, 500)},
+        "roof": {"down": ("club_entry", 930, 500)},
     }
 
     # Determine the presence of characters in certain rooms based on the time of day

@@ -11,11 +11,12 @@ init python:
     # Function to get the relationship status as a text based on the score
     def get_relationship_status(score): # RLTS01
         if score > 0:
-            return "Positive (+[score])" 
+            return f"Positive (+{score})"
         elif score < 0:
-            return "Negative ([score])"
+            return f"Negative ({score})"
         else:
             return "Neutral (0)"
+
 
 # Button to open the Relationships screen
 screen relationships_button():

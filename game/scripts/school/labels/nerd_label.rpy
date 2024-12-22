@@ -23,6 +23,8 @@ label nerd_dialogue:
         n "Great! Let's start."
         jump start_quiz
     elif "Ask for notes from a nerd" in current_tasks and nerd_interaction == 1:
+        show nerd at right2
+        show mainCharacter at left2
         $ remove_task("Ask for notes from a nerd")
         n "Hi! Can I help you?"
         p "Hi! Yes, I'd like to ask for your help."

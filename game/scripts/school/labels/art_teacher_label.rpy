@@ -3,7 +3,7 @@ label art_teacher_dialogue:
     with fade
 
     # First interaction
-    if art_teacher_interaction == 0:
+    if art_teacher_interaction == 0 and "Go to an art class" in current_tasks:
         show ArtTeacher at right2
         hide mainCharacter
         show mainCharacter at left2
@@ -26,6 +26,7 @@ label art_teacher_dialogue:
     # Interaction after talking to the sister
     elif sister_interaction >= 2 and art_teacher_interaction == 1:
         show ArtTeacher at right2
+        hide mainCharacter
         show mainCharacter at left2
         ateacher "Did you want something?"
         p "Why did you lie to my sister about the potion?"
@@ -50,6 +51,7 @@ label art_teacher_dialogue:
         ateacher "All right! Then let's start writing the test paper!"
         jump start_teachers_quiz
     else:
+        show ArtTeacher at center
         ateacher "I'm a little busy right now."
     
     hide ArtTeacher

@@ -5,6 +5,8 @@ label old_friend_dialogue:
     with fade
 
     if "Ask for notes from an old friend" in current_tasks:
+        show old_friend at right2
+        show mainCharacter at left2
         of "Hi! How long has it been? How are you doing?"
         p "Hi! Yeah, long time no see. I'm good, how are you?"
         of "I'm doing okay, too. I heard you wanted to ask for my help. How can I help you?"
@@ -55,6 +57,7 @@ label old_friend_dialogue:
                     $ add_task("Come to the classroom teacher")
                 
     else:
+        show old_friend at center
         n "I'm a little busy right now."
 
     hide old_friend
@@ -76,7 +79,7 @@ label walkWithOldFriend:
     "You think back to that money and you almost have tears coming after those warm memories"
     "You're thinking to yourself that you didn't skip class for nothing."
     "Those warm memories were worth it"
-    P "(smiling) Yeah. Those were the good ole days."
+    p "(smiling) Yeah. Those were the good old days."
     p "You make it sound like you're in your 60s, ha ha ha ha."
     of "Ha ha ha. Well, when this was all happening. It was first grade"
     of "Then the teachers also complained to our parents that we were two bullies and skipping school"

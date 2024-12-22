@@ -72,6 +72,7 @@ label bully_dialogue:
         hide mainCharacter
         jump rock_paper_scissors_game
     else:
+        show bully at center
         b "What do you want, buddy?"
 
     hide bully

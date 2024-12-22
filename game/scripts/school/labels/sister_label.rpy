@@ -117,6 +117,7 @@ label sister_dialogue:
         if check_inventory_for_items(required_books) and "Come to the classroom teacher" not in current_tasks:
             $ add_task("Come to the classroom teacher")
     else:
+        show sister_young at center
         sister "I'm a little busy right now."
     
     hide sister_young

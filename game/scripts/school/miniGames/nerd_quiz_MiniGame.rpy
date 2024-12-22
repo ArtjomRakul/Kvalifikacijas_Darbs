@@ -136,6 +136,8 @@ label win_quiz:
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
     show screen custom_notify("Bring the coin to your sister")
+    hide nerd
+    hide mainCharacter
     jump mainSchoolLoop
 
 # Losing scenario
@@ -147,5 +149,7 @@ label lose_quiz:
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
     show screen custom_notify("Bring the coin to your sister")
+    hide nerd
+    hide mainCharacter
     jump mainSchoolLoop
 

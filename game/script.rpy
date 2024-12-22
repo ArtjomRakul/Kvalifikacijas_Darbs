@@ -46,6 +46,7 @@ image dungeon_entry_bg = im.Scale("backgrounds/forest/dungeon_entry.png", 1920, 
 image dungeon_bg = im.Scale("backgrounds/forest/dungeon.png", 1920, 1080) 
 image magicSchool_bg = im.Scale("backgrounds/magic_school/magicSchool.png", 1920, 1080) 
 image cauldron = im.Scale("images/backgrounds/magic_school/Cauldron.png", 1920, 1080)
+image street = im.Scale("images/backgrounds/magic_school/Street_Summer_Day.png", 1920, 1080)
 
 #Initialization of variables 
 default player_name = "" 
@@ -150,7 +151,7 @@ label start:
     hide mainCharacter with moveoutright 
  
     # Skip to the next scene 
-    jump forestSpiritMeeting
+    jump schoolMemories
  
 # The scene of the meeting with the Forest Spirit
 label forestSpiritMeeting:

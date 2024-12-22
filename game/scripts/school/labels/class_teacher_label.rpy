@@ -3,7 +3,6 @@ label class_teacher_dialogue:
     $ hide_screens()
     with fade
     if "Talk to the class teacher" in current_tasks:
-        $ remove_task("Talk to the class teacher")
         show ClassTeacher at right2
         hide mainCharacter
         show mainCharacter at left2
@@ -67,14 +66,16 @@ label class_teacher_dialogue:
         p "Yeah, all right!"
         $ class_teacher_interaction += 1
         show screen custom_notify("Talk to the music teacher")
+        $ remove_task("Talk to the class teacher")
         $ add_task("Talk to the music teacher")
-    elif "Come to the classroom teacher" in current_task and class_teacher_interaction == 1:
+    elif "Come to the classroom teacher" in current_tasks and class_teacher_interaction == 1:
         $ class_teacher_interaction += 1
         cteacher "So, did you study for the test?"
         p "Yeah, I'm prepared"
         cteacher "All right! Then let's start writing the test paper!"
         jump start_teachers_quiz
     else:
+        show ClassTeacher at center
         cteacher "I'm a little busy right now."
     
     hide ClassTeacher
