@@ -1,5 +1,4 @@
 label sister_dialogue:
-    $ hide_screens()
     with fade
     if sister_interaction == 0 and art_teacher_interaction == 1:
         if time_of_day != "morning":

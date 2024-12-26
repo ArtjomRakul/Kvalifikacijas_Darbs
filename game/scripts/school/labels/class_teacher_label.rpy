@@ -1,6 +1,5 @@
 
 label class_teacher_dialogue:
-    $ hide_screens()
     with fade
     if "Talk to the class teacher" in current_tasks:
         show ClassTeacher at right2

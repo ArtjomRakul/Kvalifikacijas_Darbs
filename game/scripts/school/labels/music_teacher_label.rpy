@@ -1,6 +1,5 @@
 
 label music_teacher_dialogue:
-    $ hide_screens()
     with fade
     if music_teacher_interaction == 0:
         show MusicTeacher at right2

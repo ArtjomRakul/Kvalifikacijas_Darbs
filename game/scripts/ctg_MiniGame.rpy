@@ -111,7 +111,7 @@ init python:
                 if puzzle_slots[i] is not None:
                     inventory.append(puzzle_slots[i])  # Return the books to inventory
                 puzzle_slots[i] = None
-        renpy.call("show_room")
+            renpy.call("show_room")
         
 # Label for the puzzle completion and ending scene
 label puzzle_completed:

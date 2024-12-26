@@ -1,5 +1,4 @@
 label nerd_dialogue:
-    $ hide_screens()
     with fade
     if sister_interaction == 2 and (current_location == "club" and time_of_day == "evening") and sister_coin_started:
         show nerd at right2

@@ -1,15 +1,36 @@
-﻿# Screen for managing time of day with interactive buttons
-screen time_buttons():
+﻿screen time_buttons():
+    # We'll store a color for each button, highlighting if it's the active time.
+    $ morning_color = "#cccccc"
+    $ afternoon_color = "#cccccc"
+    $ evening_color = "#cccccc"
+
+    if time_of_day == "morning":
+        $ morning_color = "#ffff88"  # highlight
+    elif time_of_day == "afternoon":
+        $ afternoon_color = "#ffff88"
+    else:
+        $ evening_color = "#ffff88"
+
     hbox:
         xalign 0.85
         yalign 0.03
-        # Display a button for the current time of day, allowing the player to advance time
-        if time_of_day == "morning":
-            textbutton "Morning" action Function(advance_time) background "#ffff88"
-        elif time_of_day == "afternoon":
-            textbutton "Afternoon" action Function(advance_time) background "#ffff88"
-        elif time_of_day == "evening":
-            textbutton "Evening" action Function(advance_time) background "#ffff88"
+
+        # MORNING BUTTON
+        textbutton "Morning":
+            background morning_color
+            action Function(advance_time, "morning")
+
+        # AFTERNOON BUTTON
+        textbutton "Afternoon":
+            background afternoon_color
+            action Function(advance_time, "afternoon")
+
+        # EVENING BUTTON
+        textbutton "Evening":
+            background evening_color
+            action Function(advance_time, "evening")
+
+
 
 # Screen for room navigation using directional arrows
 screen navigation_arrows():

@@ -1,5 +1,4 @@
 label bully_dialogue:
-    $ hide_screens()
     with fade
     if "Take your sister's notes away from the bully" in current_tasks:
         $ bully_interaction += 1

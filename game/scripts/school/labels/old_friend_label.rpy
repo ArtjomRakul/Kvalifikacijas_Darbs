@@ -1,7 +1,5 @@
    
 label old_friend_dialogue:
-
-    $ hide_screens()
     with fade
 
     if "Ask for notes from an old friend" in current_tasks:
@@ -67,6 +65,7 @@ label old_friend_dialogue:
 
 
 label walkWithOldFriend:
+    scene street
     $ goForAWalk = True
     $ old_friend_relationship += 1
     "You came to the park"

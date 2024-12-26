@@ -1,5 +1,4 @@
 label art_teacher_dialogue:
-    $ hide_screens()
     with fade
 
     # First interaction
