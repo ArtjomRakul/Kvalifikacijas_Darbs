@@ -11,11 +11,20 @@ init python:
     # Function to remove an item from the inventory
     def remove_from_inventory(item_name):   # INV02
         global inventory_items
+
+        # Track whether the item was found
+        found_item = False
+
         # Loop through the inventory to find the item by its name
         for i in range(len(inventory_items)):
             if inventory_items[i] is not None and inventory_items[i][0] == item_name:
                 inventory_items[i] = None  # Remove the item from the inventory
+                found_item = True
                 break
+
+        # If we never found it, show a notification
+        if not found_item:
+            renpy.notify("Item not found in inventory")
 
         renpy.restart_interaction()  # Refresh the inventory display
 
