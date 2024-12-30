@@ -72,7 +72,7 @@ label class_teacher_dialogue:
         cteacher "So, did you study for the test?"
         p "Yeah, I'm prepared"
         cteacher "All right! Then let's start writing the test paper!"
-        jump start_teachers_quiz
+        call start_teachers_quiz
     else:
         show ClassTeacher at center
         cteacher "I'm a little busy right now."
@@ -80,5 +80,6 @@ label class_teacher_dialogue:
     hide ClassTeacher
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return
         

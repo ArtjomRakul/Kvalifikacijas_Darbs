@@ -6,7 +6,8 @@ label sister_dialogue:
             sister "I'm a little busy right now."
             hide sister_young
             hide mainCharacter
-            jump mainSchoolLoop
+            $ show_screens()
+            return
         show sister_young at right2
         hide mainCharacter
         show mainCharacter at left2
@@ -57,6 +58,7 @@ label sister_dialogue:
                 $ add_task("Go to the club room and meet a nerd")
                 show screen custom_notify("Go to the club room and meet a nerd")
             "Leave":
+                $ sister_coin_started = False
                 $ sister_relationship -= 1
                 "You decide to leave your sister alone for now."
                 $ remove_task("Talk to your sister in class")
@@ -71,9 +73,10 @@ label sister_dialogue:
         hide sister_young
         hide mainCharacter
         with fade
-        jump mainSchoolLoop
+        $ show_screens()
+        return
         
-    elif sister_interaction == 2 and nerd_interaction == 1 and sister_coin_started:
+    elif nerd_interaction == 1 and sister_coin_started and "Ask for notes from your sister" not in current_tasks and "BookGreen" not in [item[0] for item in inventory_items if item]:
         if "CoinBronze" in [item[0] for item in inventory_items if item]:
             $ remove_from_inventory("CoinBronze")
             $ sister_relationship -= 1
@@ -83,9 +86,8 @@ label sister_dialogue:
             $ sister_relationship += 1
             sister "Wow, you did it! I'm so proud of you!"
             sister "This really means a lot to me."
-
+        
         hide sister_young
-        $ sister_interaction += 1
         $ remove_task("Bring the coin to your sister")
         if "Talk to the art teacher" not in current_tasks:
             $ add_task("Talk to the art teacher")
@@ -93,10 +95,13 @@ label sister_dialogue:
             $ add_task("Talk to the music teacher")
 
         show screen custom_notify("Talk to the teachers")
-        jump mainSchoolLoop
-    elif "Ask for notes from your sister" in current_tasks and sister_interaction >= 2:
-        jump sister_notes
-    elif "Bring the notes to your sister" in current_tasks and sister_interaction >= 3:
+        $ show_screens()
+        return
+    elif "Ask for notes from your sister" in current_tasks and sister_interaction == 2 and "BookGreen" not in [item[0] for item in inventory_items if item]:
+        call sister_notes
+    elif "Bring the notes to your sister" in current_tasks and sister_interaction == 3 and "BookGreen" in [item[0] for item in inventory_items if item]:
+        show sister_young at right2
+        show mainCharacter at left2
         $ sister_interaction += 1
         p "Hey! I brought you the tapes."
         p "I took them from the bully."
@@ -111,8 +116,6 @@ label sister_dialogue:
         "You took your sister's notebook."
         "Now you can prepare for all the test papers"
         $ remove_task("Bring the notes to your sister")
-        if "BookGreen" not in [item[0] for item in inventory_items if item]:
-            $ add_to_inventory(*notes_items["BookGreen"])
         if check_inventory_for_items(required_books) and "Come to the classroom teacher" not in current_tasks:
             $ add_task("Come to the classroom teacher")
     else:
@@ -122,7 +125,8 @@ label sister_dialogue:
     hide sister_young
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return
 
 label sister_notes:
     $ sister_interaction += 1
@@ -142,21 +146,27 @@ label sister_notes:
     b "Call out to him in your sheepish voice."
     b "Just watch your voice."
     "You see the sister trying to say something, but she can't make it."
-    if nerdQuizWin == False:
-        menu:
-            "Help your sister":
-                $ sister_relationship += 1
-                jump helpYourSister
-            "Leave":
-                $ sister_relationship -= 1
-                jump leaveYourSister
+    if sister_coin_started:
+        if nerdQuizWin == False:
+            menu:
+                "Help your sister":
+                    $ sister_relationship += 1
+                    call helpYourSister
+                "Leave":
+                    $ sister_relationship -= 1
+                    call leaveYourSister
+        else:
+            call helpYourSister
     else:
-        jump leaveYourSister
+        call leaveYourSister
+    
+    return
 
 label helpYourSister:
+    play music darkmusic
     "You can't stand it when someone is rude to your sister."
     "You decide to intervene."
-    show maincharacter at left2
+    show mainCharacter at left2
     p "Hey, you! What's going on here?"
     p "Can't you see she doesn't want to talk to you?"
     p "Leave her alone!"
@@ -175,6 +185,7 @@ label helpYourSister:
     "You can't stop that shaking as the bully is stronger than you."
     "You don't know what to do."
     "But one thing's for sure, you won't let your sister suffer."
+    play music seriousmusic
     if helpSister == False:
         "You remember that you've already dumped her once and you don't want to do it again."
         "You don't want her to be alone."
@@ -187,7 +198,7 @@ label helpYourSister:
         "Your confidence returns to you and you're ready to protect your sister."
     p "I told you to leave her alone!"
     "You're scared, but you take a step toward him."
-    show maincharacter at right1
+    show mainCharacter at left1
     with moveoutright
     if helpSister == False:
         "The bully paused for a moment."
@@ -205,9 +216,9 @@ label helpYourSister:
         "You're starting to tremble"
         "You're starting to panic"
         if goForAWalk == True:
-            jump helpFromOldFriend
+            call helpFromOldFriend
         else:
-            jump failureToProtectSister
+            call failureToProtectSister
     else:
         "The bully stopped."
         "You can see in his face as he begins to realize you're serious."
@@ -226,11 +237,14 @@ label helpYourSister:
         sister "Stop it! Stop it!"
         "The situation is escalating"
         if goForAWalk == True:
-            jump helpFromOldFriend
+            call helpFromOldFriend
         else:
-            jump failureToProtectSister
+            call failureToProtectSister
+    
+    return
 
 label leaveYourSister:
+    play music sadmusic
     "You decide not to get involved in the situation."
     "You look from the side at them and you remember that you've seen this picture somewhere before."
     "You remember that situation in the woods on the way to the tavern."
@@ -293,6 +307,8 @@ label leaveYourSister:
         $ current_location = "hallway12"
     elif current_location == "classroom13":
         $ current_location = "hallway13"
+    
+    $ update_background()
 
     $ remove_task("Ask for notes from your sister")
     if "BookGreen" not in [item[0] for item in inventory_items if item]:
@@ -302,7 +318,7 @@ label leaveYourSister:
     hide mainCharacter
     hide sister_young
     hide bully
-    jump mainSchoolLoop
+    return
                 
 label failureToProtectSister:
     with fade
@@ -319,6 +335,7 @@ label failureToProtectSister:
     p "(to myself) What the hell is going on here?"
     $ update_background()
     show sister_young at center
+    play music sadmusic
     sister "Brother! Brother!"
     "You're getting a headache"
     p "Don't shout like that! My head hurts!"
@@ -398,9 +415,10 @@ label failureToProtectSister:
     $ add_task("Take your sister's notes away from the bully")
     hide mainCharacter
     hide sister_young
-    jump mainSchoolLoop
+    return
                         
 label helpFromOldFriend:
+    play music emotionalmusic
     "Suddenly your old friend comes to your rescue."
     show old_friend at center
     with moveinright
@@ -421,40 +439,41 @@ label helpFromOldFriend:
     "You've calmed down a bit, but your heart is still beating fast"
     "Hands are still shaking"
     "An old friend turns to you and smiles"
-    old_friend "Are you all right?"
+    of "Are you all right?"
     p "Yes, thank you so much! I owe you one!"
     p "I dread to imagine what would have happened if you hadn't shown up"
-    old_friend "You're welcome! I'm always happy to help!"
+    of "You're welcome! I'm always happy to help!"
     sister "Thank you so much!"
     "The sister looks at you worriedly"
     sister "How are you? Are you okay?"
     p "Yeah, I'm fine!"
     p "How are you doing? Did he do something to you?"
     sister "No, he was just hitting on me"
-    if nerdQuizWin == True:
-        sister "He wanted to take that coin you gave me."
-        "After hearing those words, you got angry"
-        "You have strength and self-confidence"
-        "The strength and confidence to talk to a bully"
-        p "He's an asshole!"
-        sister "Easy, easy! It's okay!"
-        sister "He didn't take it, so it's okay."
-        "You calmed down right after that"
-        p "(relieved) Whew, that's good."
-        p "Cause I've been meaning to deal with him"
-        sister "Handle it? With him?"
-        sister "After all this?"
-        sister "Are you out of your mind? You don't want to do that"
-        p "Yeah, you're right."
-    else:
-        sister "He wanted to take something from me."
-        p "Which is what?"
-        sister "Well... It doesn't matter"
-        p "No, it's very important!"
-        p "What if he comes back to take that thing away from you again!"
-        sister "Well... I don't think he's coming back"
-        sister "Besides, it doesn't really matter what he wanted to take from me."
-        p "I see..."
+    if sister_coin_started:
+        if nerdQuizWin == True:
+            sister "He wanted to take that coin you gave me."
+            "After hearing those words, you got angry"
+            "You have strength and self-confidence"
+            "The strength and confidence to talk to a bully"
+            p "He's an asshole!"
+            sister "Easy, easy! It's okay!"
+            sister "He didn't take it, so it's okay."
+            "You calmed down right after that"
+            p "(relieved) Whew, that's good."
+            p "Cause I've been meaning to deal with him"
+            sister "Handle it? With him?"
+            sister "After all this?"
+            sister "Are you out of your mind? You don't want to do that"
+            p "Yeah, you're right."
+        else:
+            sister "He wanted to take something from me."
+            p "Which is what?"
+            sister "Well... It doesn't matter"
+            p "No, it's very important!"
+            p "What if he comes back to take that thing away from you again!"
+            sister "Well... I don't think he's coming back"
+            sister "Besides, it doesn't really matter what he wanted to take from me."
+            p "I see..."
     sister "So you need to get some rest after all this"
     sister "Because you've been so nervous since the incident."
     sister "Go get some rest."
@@ -474,4 +493,4 @@ label helpFromOldFriend:
     hide old_friend
     hide sister_young
     hide mainCharacter
-    jump mainSchoolLoop
+    return

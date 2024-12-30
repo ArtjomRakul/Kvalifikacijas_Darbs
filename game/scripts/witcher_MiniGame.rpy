@@ -31,6 +31,7 @@ init python:
 
 # Start of the mini-game label
 label witch_minigame:
+    play music seriousmusic
     # Check if mini-game has already been completed
     if witch_minigame_completed:
         return  # Exit immediately if completed

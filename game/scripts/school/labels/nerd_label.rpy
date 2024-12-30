@@ -20,8 +20,8 @@ label nerd_dialogue:
         n "How about that?"
         p "Okay, I agree."
         n "Great! Let's start."
-        jump start_quiz
-    elif "Ask for notes from a nerd" in current_tasks and nerd_interaction == 1:
+        call start_quiz
+    elif "Ask for notes from a nerd" in current_tasks:
         show nerd at right2
         show mainCharacter at left2
         $ remove_task("Ask for notes from a nerd")
@@ -42,24 +42,25 @@ label nerd_dialogue:
         p "Can you help me?"
         "You look at the nerd with hope."
         n "Of course I'll help you. But not for nothing, of course"
-        if nerdQuizWin:
-            n "You did a good job with my questions last time."
-            n "Well you remember that little test you took to get a coin for your sister?"
-            n "Well, you managed to pass it and I gave you a coin."
-            n "I think you've had enough tests."
-            n "You did well last time, so you should be able to answer my questions correctly this time too"
-            n "And I don't really want to bog you down with questions, because we've got midterms coming up."
-            n "Probably the least you want to do right now is take tests."
-            n "And I don't want you to think I'm just a nerd who's only interested in learning."
-            n "Studying is great, but in addition to studying you should also rest, do sports, socialize with friends"
-            n "In short, live life to the fullest"
-            "You're a little tired of his speech"
-            p "So what's your point?"
-        else:
-            n "You didn't do a very good job with my questions last time"
-            n "Even though they weren't very difficult, I'm a little surprised you didn't do well....."
-            n "I'm not surprised you want my tapes."
-            n "Apparently you're clearly not ready for a math test."
+        if sister_coin_started:
+            if nerdQuizWin:
+                n "You did a good job with my questions last time."
+                n "Well you remember that little test you took to get a coin for your sister?"
+                n "Well, you managed to pass it and I gave you a coin."
+                n "I think you've had enough tests."
+                n "You did well last time, so you should be able to answer my questions correctly this time too"
+                n "And I don't really want to bog you down with questions, because we've got midterms coming up."
+                n "Probably the least you want to do right now is take tests."
+                n "And I don't want you to think I'm just a nerd who's only interested in learning."
+                n "Studying is great, but in addition to studying you should also rest, do sports, socialize with friends"
+                n "In short, live life to the fullest"
+                "You're a little tired of his speech"
+                p "So what's your point?"
+            else:
+                n "You didn't do a very good job with my questions last time"
+                n "Even though they weren't very difficult, I'm a little surprised you didn't do well....."
+                n "I'm not surprised you want my tapes."
+                n "Apparently you're clearly not ready for a math test."
         p "What am I supposed to do?"
         n "As you know, every week someone from the class cleans the school"
         n "And so this week I'm cleaning up the school"
@@ -73,7 +74,7 @@ label nerd_dialogue:
         "So you realize you have no choice but to help him clean up."
         p "All right, I'll do it."
         n "That's great! Let's get started"
-        jump rubbish_collector
+        call rubbish_collector
     else:
         show nerd
         n "I'm a little busy right now."
@@ -81,5 +82,6 @@ label nerd_dialogue:
     hide nerd
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return
  

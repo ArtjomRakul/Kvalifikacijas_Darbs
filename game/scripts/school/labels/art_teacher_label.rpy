@@ -23,7 +23,7 @@ label art_teacher_dialogue:
         $ art_teacher_interaction += 1
 
     # Interaction after talking to the sister
-    elif sister_interaction >= 2 and art_teacher_interaction == 1:
+    elif sister_interaction == 2 and art_teacher_interaction == 1:
         show ArtTeacher at right2
         hide mainCharacter
         show mainCharacter at left2
@@ -43,12 +43,13 @@ label art_teacher_dialogue:
             if "Talk to the music teacher" not in current_tasks:
                 show screen custom_notify("Talk to the class teacher")
                 $ add_task("Talk to the class teacher")
+                $ art_teacher_interaction += 1
     elif "Come to the art teacher" in current_tasks:
         $ art_teacher_interaction += 1
         ateacher "So, did you study for the test?"
         p "Yeah, I'm prepared"
         ateacher "All right! Then let's start writing the test paper!"
-        jump start_teachers_quiz
+        call start_teachers_quiz
     else:
         show ArtTeacher at center
         ateacher "I'm a little busy right now."
@@ -56,4 +57,5 @@ label art_teacher_dialogue:
     hide ArtTeacher
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return

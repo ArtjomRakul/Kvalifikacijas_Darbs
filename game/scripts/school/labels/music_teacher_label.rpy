@@ -44,7 +44,7 @@ label music_teacher_dialogue:
         $ remove_task("Go to the music class")
         $ add_task("Talk to your sister in class")
         show screen custom_notify("Talk to your sister in class")
-    elif class_teacher_interaction == 0 and sister_interaction == 3 and music_teacher_interaction == 1 and "Talk to the music teacher" in current_tasks:
+    elif class_teacher_interaction == 0 and sister_interaction >= 2 and music_teacher_interaction == 1 and "Talk to the music teacher" in current_tasks:
         show MusicTeacher at right2
         show mainCharacter at left2
         mteacher "I am very disappointed in your progress in my subject. You're doing very poorly"
@@ -105,7 +105,7 @@ label music_teacher_dialogue:
         mteacher "So, did you study for the test?"
         p "Yeah, I'm prepared"
         mteacher "All right! Then let's start writing the test paper!"
-        jump start_teachers_quiz
+        call start_teachers_quiz
     else:
         show MusicTeacher at center
         mteacher "I'm a little busy right now."
@@ -113,4 +113,5 @@ label music_teacher_dialogue:
     hide MusicTeacher
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return

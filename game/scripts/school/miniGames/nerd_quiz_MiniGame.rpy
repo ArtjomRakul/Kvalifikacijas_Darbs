@@ -42,16 +42,55 @@ label start_quiz:
 
     # List of quiz questions with options and answers
     define quiz_questions = [
-        {"question": "What is the capital of France?", "options": ["Berlin", "Paris", "Rome", "Madrid"], "answer": 1, "subject": "Geography"},
-        {"question": "What is the powerhouse of the cell?", "options": ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], "answer": 1, "subject": "Biology"},
-        {"question": "What is 12 x 8?", "options": ["96", "88", "108", "86"], "answer": 0, "subject": "Math"},
-        {"question": "What is the speed of light in vacuum?", "options": ["3x10^6 m/s", "3x10^8 m/s", "3x10^10 m/s", "3x10^12 m/s"], "answer": 1, "subject": "Physics"},
-        {"question": "Who was the first president of the USA?", "options": ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "James Madison"], "answer": 2, "subject": "History"},
-        {"question": "What is the largest planet in our solar system?", "options": ["Mars", "Venus", "Jupiter", "Saturn"], "answer": 2, "subject": "Astronomy"},
-        {"question": "What is the chemical symbol for gold?", "options": ["Au", "Ag", "Fe", "Cu"], "answer": 0, "subject": "Chemistry"},
-        {"question": "Who wrote 'Romeo and Juliet'?", "options": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"], "answer": 0, "subject": "Literature"},
-        {"question": "What is the largest mammal on Earth?", "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"], "answer": 1, "subject": "Biology"},
-        {"question": "What is the square root of 144?", "options": ["12", "14", "16", "18"], "answer": 0, "subject": "Math"}
+        {"question": "What is the capital of France?", 
+        "options": ["Berlin", "Paris", "Rome", "Madrid"], 
+        "answer": 1, 
+        "subject": "Geography"},
+
+        {"question": "What is the powerhouse of the cell?", 
+        "options": ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], 
+        "answer": 1, 
+        "subject": "Biology"},
+
+        {"question": "What is 12 x 8?", 
+        "options": ["96", "88", "108", "86"], 
+        "answer": 0, 
+        "subject": "Math"},
+
+        {"question": "What is the speed of light in vacuum?", 
+        "options": ["3x10^6 m/s", "3x10^8 m/s", "3x10^10 m/s", "3x10^12 m/s"], 
+        "answer": 1, 
+        "subject": "Physics"},
+
+        {"question": "Who was the first president of the USA?", 
+        "options": ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "James Madison"], 
+        "answer": 2, 
+        "subject": "History"},
+
+        {"question": "What is the largest planet in our solar system?", 
+        "options": ["Mars", "Venus", "Jupiter", "Saturn"], 
+        "answer": 2, 
+        "subject": "Astronomy"},
+
+        {"question": "What is the chemical symbol for gold?", 
+        "options": ["Au", "Ag", "Fe", "Cu"], 
+        "answer": 0, 
+        "subject": "Chemistry"},
+
+        {"question": "Who wrote 'Romeo and Juliet'?", 
+        "options": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"], 
+        "answer": 0, 
+        "subject": "Literature"},
+
+        {"question": "What is the largest mammal on Earth?", 
+        "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"], 
+        "answer": 1, 
+        "subject": "Biology"},
+
+        {"question": "What is the square root of 144?", 
+        "options": ["12", "14", "16", "18"], 
+        "answer": 0, 
+        "subject": "Math"}
     ]
 
     # Shuffle questions
@@ -59,7 +98,8 @@ label start_quiz:
         shuffle_questions(quiz_questions)
 
     # Start quiz loop
-    jump quiz_loop
+    call quiz_loop
+    return
 
 # Main quiz loop to display questions
 label quiz_loop:
@@ -75,9 +115,18 @@ label quiz_loop:
         $ quiz_timer_active = True
 
         # Show question screen
-        call screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_subject, quiz_correct_option)
+        call screen quiz_question_screen_with_timer(
+            quiz_question_text, 
+            quiz_options, 
+            quiz_subject, 
+            quiz_correct_option
+        )
+
+        # Once the screen returns, go back to top of quiz_loop
+        # so we either show next question or end the quiz.
         return
     else:
+        # All questions have been asked -> CALL quiz_result
         jump quiz_result
 
 # Handle timeout scenario when the player doesn't answer in time
@@ -98,32 +147,6 @@ label quiz_result:
     else:
         jump lose_quiz
 
-# Screen for questions with timer
-screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_subject, quiz_correct_option):
-    modal True
-    frame:
-        # Center the question frame
-        align (0.5, 0.5)
-        vbox:
-            spacing 10
-            text f"Subject: {quiz_subject}" size 30
-            text quiz_question_text size 25
-            # Display options
-            for i, option in enumerate(quiz_options):
-                textbutton option:
-                    # Handle answer selection
-                    action Function(handle_quiz_answer, i, quiz_correct_option)
-            # Display a progress bar for the timer
-            bar value AnimatedValue(quiz_time_left / 15.0) range 1.0:
-                xsize 300 ysize 20
-                # Green bar for time remaining
-                left_bar "#00FF00"
-                # Red bar for elapsed time
-                right_bar "#FF0000"
-            text f"Time left: {quiz_time_left:.1f} seconds" size 20 color "#FF0000" align (0.5, 0.5)
-    # Timer countdown
-    timer 0.1 repeat True action Function(update_timer)   
-
 # Winning scenario
 label win_quiz:
     python:
@@ -138,7 +161,7 @@ label win_quiz:
     show screen custom_notify("Bring the coin to your sister")
     hide nerd
     hide mainCharacter
-    jump mainSchoolLoop
+    return
 
 # Losing scenario
 label lose_quiz:
@@ -151,5 +174,5 @@ label lose_quiz:
     show screen custom_notify("Bring the coin to your sister")
     hide nerd
     hide mainCharacter
-    jump mainSchoolLoop
+    return
 

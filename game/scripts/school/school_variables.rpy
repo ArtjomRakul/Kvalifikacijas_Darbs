@@ -39,9 +39,9 @@ define required_books = {"BookGreen", "BookBlue", "BookBrown"}
 define required_potion_ingredients = {"FruitGreen", "RoseWhite", "PotionGreenBlue"}
 
 # Track boolean flags for specific game events
-$ sister_coin_started = False
-$ nerdQuizWin = False
-$ goForAWalk = False
+default sister_coin_started = False
+default nerdQuizWin = False
+default goForAWalk = False
 
 init python:
     # Define conditions for room visibility

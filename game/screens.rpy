@@ -1,4 +1,44 @@
-﻿screen time_buttons():
+﻿## Screens for the mini-game  #########################################################
+##
+## The screen is called up to display a mini-game within the game. 
+## nerd_Quiz (nq) -  mini-game name.
+##
+
+# Screen for questions with timer
+screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_subject, quiz_correct_option):
+    modal True
+    frame:
+        # Center the question frame
+        align (0.5, 0.5)
+        vbox:
+            spacing 10
+            text f"Subject: {quiz_subject}" size 30
+            text quiz_question_text size 25
+            # Display options
+            for i, option in enumerate(quiz_options):
+                textbutton option:
+                    # Handle answer selection
+                    action Function(handle_quiz_answer, i, quiz_correct_option)
+            # Display a progress bar for the timer
+            bar value AnimatedValue(quiz_time_left / 15.0) range 1.0:
+                xsize 300 ysize 20
+                # Green bar for time remaining
+                left_bar "#00FF00"
+                # Red bar for elapsed time
+                right_bar "#FF0000"
+            text f"Time left: {quiz_time_left:.1f} seconds" size 20 color "#FF0000" align (0.5, 0.5)
+    # Timer countdown
+    timer 0.1 repeat True action Function(update_timer)   
+
+
+
+## Screens for school part of the game  #########################################################
+##
+## The screen is called up to display necessary buttons within the game. 
+## timeOfDay -  main school file.
+##
+
+screen time_buttons():
     # We'll store a color for each button, highlighting if it's the active time.
     $ morning_color = "#cccccc"
     $ afternoon_color = "#cccccc"
@@ -29,8 +69,6 @@
         textbutton "Evening":
             background evening_color
             action Function(advance_time, "evening")
-
-
 
 # Screen for room navigation using directional arrows
 screen navigation_arrows():

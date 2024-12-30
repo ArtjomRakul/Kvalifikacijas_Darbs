@@ -45,11 +45,11 @@ define drawing_quiz_questions = [
 label start_teachers_quiz:
     # Determine which quiz to start based on quiz_progress
     if quiz_progress == "math":
-        jump math_quiz_start
+        call math_quiz_start
     elif quiz_progress == "music":
-        jump music_quiz_start
+        call music_quiz_start
     elif quiz_progress == "drawing":
-        jump drawing_quiz_start
+        call drawing_quiz_start
     return
 
 # Labels for starting each specific quiz
@@ -58,21 +58,24 @@ label math_quiz_start:
     # Shuffle questions
     python:
         shuffle_questions(math_quiz_questions)
-    jump quiz_teachers_loop
+    call quiz_teachers_loop
+    return
 
 label music_quiz_start:
     $ quiz_progress = "music"
     # Shuffle questions
     python:
         shuffle_questions(music_quiz_questions)
-    jump quiz_teachers_loop
+    call quiz_teachers_loop
+    return
 
 label drawing_quiz_start:
     $ quiz_progress = "drawing"
     # Shuffle questions
     python:
         shuffle_questions(drawing_quiz_questions)
-    jump quiz_teachers_loop
+    call quiz_teachers_loop
+    return
 
 # Main loop for presenting quiz questions
 label quiz_teachers_loop:
@@ -87,7 +90,8 @@ label quiz_teachers_loop:
         $ current_question = drawing_quiz_questions[drawing_quiz_question_index]
         $ quiz_score = drawing_quiz_score
     else:
-        jump quiz_teachers_result   # Jump to the result screen if all questions are answered
+        call quiz_teachers_result   # Jump to the result screen if all questions are answered
+        return
 
     # Prepare question data for display
     $ quiz_question_text = current_question["question"]
@@ -96,7 +100,13 @@ label quiz_teachers_loop:
     $ quiz_time_left = 15.0
     $ quiz_timer_active = True
 
-    call screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option)
+    call screen quiz_screen(
+        quiz_question_text, 
+        quiz_options, 
+        quiz_correct_option
+    )
+    
+    return
 
 # Handle timeout when the player doesn't answer in time
 label quiz_teachers_timeout:
@@ -118,7 +128,7 @@ label quiz_teachers_result:
         $ quiz_progress = "music"
         $ remove_task("Come to the classroom teacher")
         $ add_task("Come to the music teacher")
-        jump mainSchoolLoop
+        return
     elif quiz_progress == "music" and music_quiz_score >= 150:
         python:
             renpy.sound.play(success)
@@ -127,9 +137,7 @@ label quiz_teachers_result:
         $ quiz_progress = "drawing"
         $ remove_task("Come to the music teacher")
         $ add_task("Come to the art teacher")
-        jump mainSchoolLoop
-        python:
-            renpy.sound.play(success)
+        return
     elif quiz_progress == "drawing" and drawing_quiz_score >= 150:
         python:
             renpy.sound.play(success)
@@ -137,8 +145,7 @@ label quiz_teachers_result:
         show screen custom_notify("Brew a potion")
         $ quiz_progress = "done"
         $ remove_task("Come to the art teacher")
-        $ add_task("Brew a potion")
-        jump mainSchoolLoop
+        return
     else:
         n "You failed the quiz. Try again!"
         # Resetting test results for retry

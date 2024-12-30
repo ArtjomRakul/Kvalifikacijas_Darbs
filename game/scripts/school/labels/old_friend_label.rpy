@@ -31,7 +31,9 @@ label old_friend_dialogue:
                 "But, besides the music test, you'll have two other tests in other subjects."
                 "At the same time, you realize that you made the right choice because you improved your relationship with your friend"
                 "And sometimes relationships are more important than studying"
-                jump walkWithOldFriend
+                hide old_friend
+                hide mainCharacter
+                call walkWithOldFriend
             "Refuse":
                 $ old_friend_relationship -= 1
                 "You remember that you really haven't talked in a while and you'd love to spend time with him"
@@ -61,15 +63,19 @@ label old_friend_dialogue:
     hide old_friend
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return
 
 
 label walkWithOldFriend:
+    play music chillmusic
     scene street
+    show old_friend at right2
+    show mainCharacter at left2
     $ goForAWalk = True
     $ old_friend_relationship += 1
-    "You came to the park"
-    "The sun is shining. A faint but warm breeze is blowing."
+    "You came to the street"
+    "The sun is shining."
     "You're reminiscing about the old days"
     of "(with a smile on his face) Eh, remember those very young days when we skipped our last classes?"
     of "When we were at the park playing catch-up on the playground."
@@ -108,8 +114,6 @@ label walkWithOldFriend:
     p "How is that possible? We were just in the park!"
     p "And how did we end up back in the field anyway? Isn't this place outside of this building?"
     of "We're in the memories. Since you've been here before, you remember this place, so I can show you this field."
-    of "I can show you all your memories"
-    # Поочерёдно показывает все воспоминания
     p "(frightened) Who are you or what are you?"
     of "I am your memories"
     p "And why did you show me all this?"
@@ -154,8 +158,10 @@ label walkWithOldFriend:
     "You came back"
     of "Oh yeah, here's the footage you asked for. Hopefully we'll get to go out like this again."
     p "Thanks for the walk and for the notes! Yes, it will definitely work out!"
+    $ remove_task("Ask for notes from an old friend")
     if "BookBrown" not in [item[0] for item in inventory_items if item]:
-            $ add_to_inventory(*notes_items["BookBrown"])
+        $ add_to_inventory(*notes_items["BookBrown"])
     if check_inventory_for_items(required_books) and "Come to the classroom teacher" not in current_tasks:
         $ add_task("Come to the classroom teacher")
-    jump mainSchoolLoop
+    
+    return

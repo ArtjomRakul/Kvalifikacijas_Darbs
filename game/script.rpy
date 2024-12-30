@@ -60,16 +60,26 @@ default helpSister = False
 define config.has_sound = True
 define config.has_music = True
 
+# Sounds
 define click = "sounds/click2.ogg"
 define switch = "sounds/switch2.ogg"
-define success = "sounds/game/sounds/jingles_STEEL04.ogg."
-define fail = "sounds/game/sounds/jingles_STEEL05.ogg."
+define success = "sounds/jingles_STEEL04.ogg."
+define fail = "sounds/jingles_STEEL05.ogg."
+
+# Music
+define bgmusic = "music/aura-273351.mp3"
+define sadmusic = "music/cold-sad-pianos-150019.mp3"
+define emotionalmusic = "music/emotional-inspiring-piano-amp-violin-150030.mp3"
+define seriousmusic = "music/countdown-149998.mp3"
+define chillmusic = "music/astroscape-motivation-275674.mp3"
+define darkmusic = "music/cold-mind-enigma-2-crime-mysterious-detective-music-loopable-95450.mp3"
 
 # Start of the game 
 label start: 
     # A background image of the field with a blackout effect is shown 
     scene field_bg 
     with fade 
+    play music bgmusic
     # Input the name of the main character 
     $ player_name = renpy.input("Enter the main character's name:") 
     # The .strip() function removes extra spaces that the player may have typed in accidentally. 
@@ -151,7 +161,7 @@ label start:
     hide mainCharacter with moveoutright 
  
     # Skip to the next scene 
-    jump schoolMemories
+    jump forestSpiritMeeting
  
 # The scene of the meeting with the Forest Spirit
 label forestSpiritMeeting:
@@ -462,6 +472,7 @@ label forestCrossroad:
         jump pathIntoDarkForest
  
 label unknown_house:
+    play music chillmusic
     scene unknownHouse_bg with fade
     show mainCharacter at center
     "You're walking down a path and suddenly you see a house in front of you."
@@ -481,6 +492,7 @@ label unknown_house:
     
 # The scene of the meeting with the Shadows in the dark woods 
 label pathIntoDarkForest: 
+    play music darkmusic
     scene darkForest_bg with dissolve 
     show mainCharacter at left2  
     with moveinleft 
@@ -584,6 +596,7 @@ label run_away:
  
 # The scene of the return to the crossroads after the meeting with the Shadows     
 label return_to_crossroad: 
+    play music emotionalmusic
     scene crossroad_bg with fade 
     "You're going back to the crossroads." 
     show mainCharacter at center 
@@ -637,6 +650,7 @@ label sisterMeeting:
     "You go and wonder why someone would want to hide some potion in their own house." 
     "The most important question is from whom and why?" 
     "You suddenly hear voices." 
+    play music seriousmusic
     "You see a man hitting on a woman." 
     show shadow_bandit at right3 
     with dissolve 
@@ -712,6 +726,7 @@ label help_sister:
     show sister_img at right2 
     with moveoutright 
     show mainCharacter at left2 
+    play music emotionalmusic
     sister "Thank you, little brother! I don't know what I'd do without you!" 
     p "You're welcome! I did the best I could!" 
     "He smiles, but then freezes, her words catching him off guard."
@@ -797,6 +812,7 @@ label dont_help_sister:
  
 # The scene on the way to the tavern 
 label pathToTavern: 
+    play music bgmusic
     # Counting the total number of character relationships to date 
     $ overall_relationships += relationship_sister + relationship_wiseMan 
     if overall_relationships > 0 and overcoming_fears > 0: 
@@ -1137,6 +1153,7 @@ label tavern:
     jump swamp 
  
 label swamp:
+    play music darkmusic
     if relationship_wiseMan == -1 and relationship_sister == -1:
         scene strangerSwamp_bg with fade
         show mainCharacter at center
@@ -1380,6 +1397,7 @@ label swamp:
     jump witch_minigame
      
 label returnToStranger: 
+    play music bgmusic
     scene village_bg with fade 
     show stranger_img at right2 
     with dissolve 
@@ -1456,7 +1474,7 @@ label returnToStranger:
         stranger "(grudgingly) At least you’re honest about it. I’ll give you that much."  
         "The Wanderer’s voice softens slightly, though the underlying anger remains. He exhales sharply, shaking his head."  
         stranger "If you hadn’t told me the truth, I wouldn’t have been able to find her in time."
-        strnager "The Shadow would’ve taken her, just like all the others."  
+        stranger "The Shadow would’ve taken her, just like all the others."  
         "His words catch you off guard."
         "Relief flickers through you, but it’s fleeting, weighed down by the guilt still lingering in your chest."  
         p "(hesitant) You… you saved her?"  
@@ -1623,6 +1641,7 @@ label firstCrucialChoice:
             jump returnToWiseMan
 
 label worstEnding: 
+    play music sadmusic
     scene black with fade 
     show mainCharacter at center  
     "There is complete silence."
@@ -1726,6 +1745,7 @@ label worstEnding:
     return
 
 label returnToWiseMan:
+    play music bgmusic
     scene bigTree_bg
     with fade
     show wiseMan at right2
@@ -1819,6 +1839,7 @@ label returnToWiseMan:
     jump magicSchool
  
 label badEnding:
+    play music sadmusic
     scene black with fade
     show mainCharacter at center
     "You wake up in total darkness."

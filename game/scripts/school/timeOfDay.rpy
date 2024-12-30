@@ -23,13 +23,26 @@ init python:
         hide_screens()
         renpy.call(label)
 
-# Main school location loop
-label mainSchoolLoop:
+
+# Main entry point into the school exploration part of the game
+label school_exploration:
+    # Always show the interactive screens so the player can navigate:
     window hide
     $ update_background()
     $ show_screens()
-    while True:
-        if check_inventory_for_items(required_potion_ingredients) == True:
+    
+    # As long as the player doesn’t have all items, 
+    # we keep returning here after dialogues or mini-games.
+    label exploration_loop:
+        # Check if all required items have been collected. If yes, jump to end.
+        if check_inventory_for_items(required_potion_ingredients):
             $ hide_screens()
             jump endSchoolMemories
+        
+        # We use Ren’Py’s "pause" to wait for user interaction. While paused, 
+        # the player can navigate rooms, interact with characters, etc.
         pause
+
+        jump exploration_loop
+
+    return

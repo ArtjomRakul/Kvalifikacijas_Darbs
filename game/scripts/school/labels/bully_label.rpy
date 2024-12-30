@@ -14,7 +14,7 @@ label bully_dialogue:
         b "Come on, tell me what you want!"
         "The bully is pissed off by your silence."
         "After he said that, you immediately started talking"
-        P "(quietly and uncertainly) Give me my sister's records!"
+        p "(quietly and uncertainly) Give me my sister's records!"
         b "What? Speak louder!"
         p "(uncertainly) Give me my sister's records! Please!"
         p "(uncertainly) You took my sister's notes without her permission when you left class."
@@ -69,7 +69,7 @@ label bully_dialogue:
         p "(to myself) I have to win and take the tapes away from him!"
         hide bully
         hide mainCharacter
-        jump rock_paper_scissors_game
+        call rock_paper_scissors_game
     else:
         show bully at center
         b "What do you want, buddy?"
@@ -77,4 +77,5 @@ label bully_dialogue:
     hide bully
     hide mainCharacter
     with fade
-    jump mainSchoolLoop
+    $ show_screens()
+    return

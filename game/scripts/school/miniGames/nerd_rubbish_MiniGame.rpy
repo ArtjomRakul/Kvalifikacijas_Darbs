@@ -55,6 +55,7 @@ init python:
 
 # Label to start the mini-game
 label rubbish_collector:
+    play music chillmusic
     # Reset game variables for a fresh start
     $ current_room = 1
     $ collected_garbage = 0
@@ -99,6 +100,7 @@ screen room_screen():
 
 # Label to handle the end of the mini-game
 label mini_game_end:
+    play music bgmusic
     # Update background to default or post-game state
     $ update_background()
     show nerd at right2
@@ -119,4 +121,4 @@ label mini_game_end:
     # Hide characters and return to the main loop
     hide nerd
     hide mainCharacter
-    jump mainSchoolLoop
+    return

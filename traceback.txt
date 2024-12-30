@@ -1,60 +1,42 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  [Previous line repeated 9 more times]
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 63, in script call
-    call show_rubbish_room from _call_show_rubbish_room
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  [Previous line repeated 4 more times]
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/labels/old_friend_label.rpy", line 80, in script
-    "You're thinking to yourself that you didn't skip class for nothing."
-Exception: Sayer 'P' is not defined.
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/script.rpy", line 1477, in script
+    strnager "The Shadow would’ve taken her, just like all the others."
+Exception: Sayer 'strnager' is not defined.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  [Previous line repeated 9 more times]
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 63, in script call
-    call show_rubbish_room from _call_show_rubbish_room
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  File "game/scripts/school/miniGames/nerd_rubbish_MiniGame.rpy", line 72, in script call
-    call screen room_screen
-  [Previous line repeated 4 more times]
-  File "game/scripts/school/timeOfDay.rpy", line 34, in script call
-    pause
-  File "game/scripts/school/labels/old_friend_label.rpy", line 80, in script
-    "You're thinking to yourself that you didn't skip class for nothing."
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/script.rpy", line 1477, in script
+    strnager "The Shadow would’ve taken her, just like all the others."
   File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 2573, in execute
     Say.execute(self)
   File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 575, in execute
     who = eval_who(self.who, self.who_fast)
   File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 464, in eval_who
     raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'P' is not defined.
+Exception: Sayer 'strnager' is not defined.
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 A long way home 0.9
-Fri Dec 20 17:05:19 2024
+Sun Dec 29 20:26:07 2024

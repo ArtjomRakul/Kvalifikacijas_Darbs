@@ -92,9 +92,11 @@ label rock_paper_scissors_game:
             "Congratulations! You won the rock-paper-scissors game with an overall score of [player_score] to [bully_score]!"
             b "Well, you're lucky this time"
             b "Here are your notes. Take it and go"
+            if "BookGreen" not in [item[0] for item in inventory_items if item]:
+                $ add_to_inventory(*notes_items["BookGreen"])
             $ remove_task("Take your sister's notes away from the bully")
             $ add_task("Bring the notes to your sister")
-            jump mainSchoolLoop
+            return
         else:
             python:
                 renpy.sound.play(fail) # Play the fail sound effect

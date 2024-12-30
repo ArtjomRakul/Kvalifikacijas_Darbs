@@ -1,4 +1,5 @@
 label schoolMemories:
+    play music chillmusic
     $ update_background()
     "You approach the building, a sense of anticipation mixed with trepidation swirling within you."
     "The weathered wooden doors loom before you, hinting at secrets and forgotten moments held within."
@@ -198,7 +199,8 @@ label hallway11Sister:
     $ add_task("Go to an art class")
     show screen custom_notify("Go to an art class") 
     "Your sister leaves for music class, leaving you alone in the hallway."
-    jump mainSchoolLoop
+    play music bgmusic
+    jump school_exploration
 
 
 label endSchoolMemories:
@@ -240,5 +242,6 @@ label endSchoolMemories:
         "You are glad that you got out of this place, but at the same time you are a little sad.... You sometimes think about what happened to you."
         "Soon you recovered and were discharged from the hospital. You live your life to the fullest, despite all the obstacles and worries."
         show screen custom_notify("You have reached the best ending.")
+
     "The end."
     return
