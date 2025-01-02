@@ -10,9 +10,12 @@ While running game code:
   File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
     call screen display_items(room_name)
   [Previous line repeated 7 more times]
-  File "game/script.rpy", line 1477, in script
-    strnager "The Shadow would’ve taken her, just like all the others."
-Exception: Sayer 'strnager' is not defined.
+  File "game/scripts/school/timeOfDay.rpy", line 40, in script
+    show screen craft_potion_screen
+  File "renpy/common/000statements.rpy", line 647, in execute_show_screen
+    renpy.show_screen(name, *args, **kwargs)
+Exception: Screen craft_potion_screen is not known.
+
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -26,17 +29,22 @@ Full traceback:
   File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
     call screen display_items(room_name)
   [Previous line repeated 7 more times]
-  File "game/script.rpy", line 1477, in script
-    strnager "The Shadow would’ve taken her, just like all the others."
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 2573, in execute
-    Say.execute(self)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 575, in execute
-    who = eval_who(self.who, self.who_fast)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 464, in eval_who
-    raise Exception("Sayer '%s' is not defined." % who)
-Exception: Sayer 'strnager' is not defined.
+  File "game/scripts/school/timeOfDay.rpy", line 40, in script
+    show screen craft_potion_screen
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1974, in execute
+    self.call("execute")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1953, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\statements.py", line 374, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 647, in execute_show_screen
+    renpy.show_screen(name, *args, **kwargs)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\screen.py", line 1327, in show_screen
+    raise Exception("Screen %s is not known.\n" % (name[0],))
+Exception: Screen craft_potion_screen is not known.
+
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 A long way home 0.9
-Sun Dec 29 20:26:07 2024
+Thu Jan  2 14:04:54 2025

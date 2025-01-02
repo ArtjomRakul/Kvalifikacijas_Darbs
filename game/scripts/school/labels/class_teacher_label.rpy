@@ -1,4 +1,3 @@
-
 label class_teacher_dialogue:
     with fade
     if "Talk to the class teacher" in current_tasks:
@@ -82,4 +81,3 @@ label class_teacher_dialogue:
     with fade
     $ show_screens()
     return
-        

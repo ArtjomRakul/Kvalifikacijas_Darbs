@@ -3,7 +3,7 @@ label art_teacher_dialogue:
 
     # First interaction
     if art_teacher_interaction == 0 and "Go to an art class" in current_tasks:
-        show ArtTeacher at right2
+        show art_teacher at right2
         hide mainCharacter
         show mainCharacter at left2
         ateacher "So [player_name], did you bring everything you need for the lesson this time?"
@@ -24,7 +24,7 @@ label art_teacher_dialogue:
 
     # Interaction after talking to the sister
     elif sister_interaction == 2 and art_teacher_interaction == 1:
-        show ArtTeacher at right2
+        show art_teacher at right2
         hide mainCharacter
         show mainCharacter at left2
         ateacher "Did you want something?"
@@ -51,10 +51,10 @@ label art_teacher_dialogue:
         ateacher "All right! Then let's start writing the test paper!"
         call start_teachers_quiz
     else:
-        show ArtTeacher at center
+        show art_teacher at center
         ateacher "I'm a little busy right now."
     
-    hide ArtTeacher
+    hide art_teacher
     hide mainCharacter
     with fade
     $ show_screens()

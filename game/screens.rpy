@@ -1,7 +1,187 @@
-﻿## Screens for the mini-game  #########################################################
+﻿## Screens for displaying tasks  #########################################################
+##
+## The screen is called up to display current tasks. 
+##
+
+# Screen to display the "Tasks" button in the UI
+screen tasks_button():
+    textbutton "Tasks" action Show("tasks_screen") xalign 0.05 yalign 0.03
+
+# Screen to display the list of current tasks
+screen tasks_screen(): 
+    # Marks this screen as modal, preventing interaction with other UI elements while open
+    tag menu
+    modal True
+    frame:
+        # Apply the task style to the frame
+        style_prefix "task"
+        xalign 0.5  # Center the frame horizontally
+        yalign 0.5  # Center the frame vertically
+        vbox:
+            spacing 10
+            text "Current Tasks" style "task_title"
+            # Check if there are any tasks in the current_tasks list
+            if current_tasks:
+                # Loop through each task and display it
+                for task in current_tasks:
+                    text task style "task_item"
+            else:
+                text "No current tasks." style "task_item"
+            textbutton "Close" action Hide("tasks_screen")
+
+# Style for the task list title
+style task_title:
+    size 32
+    bold True
+    color "#FFFFFF"
+    xalign 0.5
+
+# Style for each task item in the list
+style task_item:
+    size 24
+    color "#FFFFFF"
+
+## Screens for displaying relationships  #########################################################
+##
+## The screen is called up to display relationships between characters. 
+##
+
+# Button to open the Relationships screen
+screen relationships_button():
+    textbutton "Relationships" action Show("relationships_screen") xalign 0.95 yalign 0.1
+
+# Screen to display relationship statuses
+screen relationships_screen():
+    tag menu    # Identifies this screen as a menu-type screen
+    modal True  # Prevent interaction with other game elements while this screen is open
+
+    frame:
+        style_prefix "relationship" # Use a style prefix for consistent styling
+        xalign 0.5  # Center the frame horizontally
+        yalign 0.5  # Center the frame vertically
+        padding (20, 20, 20, 20)    # Add padding inside the frame
+        background "#222222"
+
+        vbox:
+            spacing 15  # Add space between each element in the vertical box layout
+            text "Relationships" style "relationship_title"
+
+            # Display each character's relationship status
+            text "Sister: [get_relationship_status(sister_relationship)]" style "relationship_item"
+            text "Music Teacher: [get_relationship_status(music_teacher_relationship)]" style "relationship_item"
+            text "Old Friend: [get_relationship_status(old_friend_relationship)]" style "relationship_item"
+
+            # Close button to exit the relationships screen
+            textbutton "Close" action Hide("relationships_screen")
+
+
+## Screens for displaying inventory  #########################################################
+##
+## The screen is called up to display an inventory. 
+##
+
+# Screen to display the inventory icon
+screen inventory_icon():
+    # A button to open the inventory screen
+    imagebutton:
+        idle "images/icons/inventory_icon.png" 
+        xpos 0.95
+        ypos 0.05
+        xanchor 0.5 # Align the icon to its center
+        yanchor 0.5
+        action Show("inventory_screen") # Action to display the inventory screen
+
+# Screen to display the full inventory
+screen inventory_screen():
+    modal True  # Prevent interaction with other elements while this screen is open
+    vbox:
+        align (0.5, 0.5)  # Center the inventory field on the screen
+        spacing 10  # Add space between inventory elements
+        textbutton "Close" action Hide("inventory_screen") align (0.5, 0.05)
+        # Grid layout to display inventory items in a 5x2 grid
+        grid 5 2 spacing 10:    # 5 columns and 2 rows with spacing
+            for item in inventory_items:
+                frame:
+                    # Display a default inventory slot background
+                    background im.Scale("images/icons/inventory_slot.png", 100, 100)
+                    xsize 100
+                    ysize 100
+                    if item is not None:    # Check if there is an item in this slot
+                        add item[1]  # Show the item image from the tuple
+
+
+## Screens for the teachers quiz mini-game  #########################################################
 ##
 ## The screen is called up to display a mini-game within the game. 
-## nerd_Quiz (nq) -  mini-game name.
+## teachers_quiz_MiniGame (TCHR) -  mini-game name.
+##
+
+# Display the current score during the quiz
+screen quiz_score_display(quiz_score):
+    frame:
+        align (0.5, 0.05)
+        background "#0008"
+        padding (10, 5)
+        text "Score: [quiz_score]" size 20
+
+# Display quiz questions and options with a timer
+screen quiz_screen(quiz_question_text, quiz_options, quiz_correct_option):
+    modal True
+    frame:
+        align (0.5, 0.5)
+        vbox:
+            spacing 10
+            text quiz_question_text size 30
+            # Display options
+            for i, option in enumerate(quiz_options):
+                textbutton option:
+                    action Function(handle_teachers_answer, i, quiz_correct_option)
+            # Display timer bar
+            bar value AnimatedValue(quiz_time_left / 15.0) range 1.0:
+                xsize 300 ysize 20
+                left_bar "#00FF00"  # Green bar for time remaining
+                right_bar "#FF0000" # Red bar for elapsed time
+            text f"Time left: {quiz_time_left:.1f}" size 20 color "#FF0000" align (0.5, 0.5)
+    # Timer countdown
+    timer 0.1 repeat True action Function(update_timer)
+
+
+## Screens for the nerd rubbish mini-game  #########################################################
+##
+## The screen is called up to display a mini-game within the game. 
+## nerd_rubbish_MiniGame (NR) -  mini-game name.
+##
+
+# Screen to display room UI and rubbish items
+screen room_screen():
+    # Display collection progress at the top of the screen
+    vbox:
+        align (0.5, 0.1)
+        text "Room [current_room]: [collected_garbage]/[garbage_per_room] items collected" size 30
+
+    # Display rubbish items at their predefined positions
+    for i, (x, y) in enumerate(item_positions[current_room]):
+        # Only show items that have not yet been collected
+        if not persistent.garbage_collected.get((current_room, i), False):
+            imagebutton:
+                idle im.Scale("images/items/nerd_rubbish_MiniGame/Stick.png", 100, 100)
+                action [
+                    # Mark item as collected
+                    Function(collect_garbage, current_room, i),
+                    SetVariable("collected_garbage", collected_garbage + 1)
+                ]
+                xpos x
+                ypos y
+
+    # If all garbage is collected, show a button to move to the next room
+    if collected_garbage >= garbage_per_room:
+        textbutton "Go to Next Room" align (0.5, 0.9) action [Function(next_room)]
+
+
+## Screens for the nerd quiz mini-game  #########################################################
+##
+## The screen is called up to display a mini-game within the game. 
+## nerd_Quiz_MiniGame (NQ) -  mini-game name.
 ##
 
 # Screen for questions with timer
@@ -35,7 +215,6 @@ screen quiz_question_screen_with_timer(quiz_question_text, quiz_options, quiz_su
 ## Screens for school part of the game  #########################################################
 ##
 ## The screen is called up to display necessary buttons within the game. 
-## timeOfDay -  main school file.
 ##
 
 screen time_buttons():

@@ -19,13 +19,6 @@ init python:
             renpy.transition(transition)  # Queue the transition correctly
         renpy.show(f"{current_location}_{time_of_day}")
 
-    # Define the correct sequence: morning -> afternoon -> evening -> morning
-    time_flow = {
-        "morning": "afternoon",
-        "afternoon": "evening",
-        "evening": "morning"
-    }
-
     # Function to advance the in-game time of day
     def advance_time(new_time): # RSCH03
         global time_of_day

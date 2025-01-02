@@ -3,7 +3,7 @@ image sister_young = im.Scale("images/characters/sister_young.png", 750, 750)
 image nerd = im.Scale("images/characters/nerd.png", 750, 750)
 image old_friend = im.Scale("images/characters/old_friend.png", 750, 750)
 image bully = im.Scale("images/characters/bully.png", 750, 750)
-image ArtTeacher = im.Scale("images/characters/teacher_art.png", 750, 750)
+image art_teacher = im.Scale("images/characters/teacher_art.png", 750, 750)
 image MusicTeacher = im.Scale("images/characters/teacher_music.png", 750, 750)
 image ClassTeacher = im.Scale("images/characters/teacher_class.png", 750, 750)
 
@@ -44,6 +44,8 @@ default nerdQuizWin = False
 default goForAWalk = False
 
 init python:
+    current_tasks = []  # A list to hold the current tasks
+    
     # Define conditions for room visibility
     # Each lambda function determines whether the room is accessible to the player
     location_conditions = {
@@ -100,13 +102,13 @@ init python:
             ("Bully", "images/characters/bully.png", 1200, 350, "bully_dialogue"),
         ],
         ("classroom12", "morning"): [
-            ("ArtTeacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue")
+            ("art_teacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue")
         ],
         ("classroom12", "afternoon"): [
-            ("ArtTeacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue"),
+            ("art_teacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue"),
         ],
         ("classroom12", "evening"): [
-            ("ArtTeacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue"),
+            ("art_teacher", "images/characters/teacher_art.png", 700, 580, "art_teacher_dialogue"),
             ("Sister", "images/characters/sister_young.png", 1300, 580, "sister_dialogue")
         ],
         ("classroom13", "morning"): [
@@ -128,4 +130,11 @@ init python:
         ("roof", "afternoon"): [
             ("Nerd", "images/characters/nerd.png", 70, 580, "nerd_dialogue")
         ]
+    }
+
+    # Define the correct sequence: morning -> afternoon -> evening -> morning
+    time_flow = {
+        "morning": "afternoon",
+        "afternoon": "evening",
+        "evening": "morning"
     }

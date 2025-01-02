@@ -1,4 +1,3 @@
-   
 label old_friend_dialogue:
     with fade
 
@@ -69,7 +68,7 @@ label old_friend_dialogue:
 
 label walkWithOldFriend:
     play music chillmusic
-    scene street
+    scene street_bg
     show old_friend at right2
     show mainCharacter at left2
     $ goForAWalk = True

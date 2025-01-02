@@ -1,4 +1,3 @@
-
 label music_teacher_dialogue:
     with fade
     if music_teacher_interaction == 0:

@@ -33,8 +33,6 @@ init python:
     if not hasattr(persistent, "garbage_collected"):
         persistent.garbage_collected = {}
 
-# Functions for the mini-game logic
-init python:
     # Function to mark an item as collected
     def collect_garbage(room, item):    # NR01
         renpy.sound.play(switch) # Play the switch sound effect
@@ -72,31 +70,6 @@ label show_rubbish_room:
     # Show the room's UI
     call screen room_screen
     return
-
-# Screen to display room UI and rubbish items
-screen room_screen():
-    # Display collection progress at the top of the screen
-    vbox:
-        align (0.5, 0.1)
-        text "Room [current_room]: [collected_garbage]/[garbage_per_room] items collected" size 30
-
-    # Display rubbish items at their predefined positions
-    for i, (x, y) in enumerate(item_positions[current_room]):
-        # Only show items that have not yet been collected
-        if not persistent.garbage_collected.get((current_room, i), False):
-            imagebutton:
-                idle im.Scale("images/items/nerd_rubbish_MiniGame/Stick.png", 100, 100)
-                action [
-                    # Mark item as collected
-                    Function(collect_garbage, current_room, i),
-                    SetVariable("collected_garbage", collected_garbage + 1)
-                ]
-                xpos x
-                ypos y
-
-    # If all garbage is collected, show a button to move to the next room
-    if collected_garbage >= garbage_per_room:
-        textbutton "Go to Next Room" align (0.5, 0.9) action [Function(next_room)]
 
 # Label to handle the end of the mini-game
 label mini_game_end:

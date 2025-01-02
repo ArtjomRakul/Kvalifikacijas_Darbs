@@ -84,4 +84,3 @@ label nerd_dialogue:
     with fade
     $ show_screens()
     return
- 

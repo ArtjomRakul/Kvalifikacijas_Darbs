@@ -37,7 +37,7 @@ label school_exploration:
         # Check if all required items have been collected. If yes, jump to end.
         if check_inventory_for_items(required_potion_ingredients):
             $ hide_screens()
-            jump endSchoolMemories
+            show screen crafting_screen
         
         # We use Ren’Py’s "pause" to wait for user interaction. While paused, 
         # the player can navigate rooms, interact with characters, etc.

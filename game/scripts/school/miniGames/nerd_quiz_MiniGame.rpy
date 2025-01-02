@@ -175,4 +175,3 @@ label lose_quiz:
     hide nerd
     hide mainCharacter
     return
-

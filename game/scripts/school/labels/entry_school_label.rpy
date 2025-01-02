@@ -204,10 +204,8 @@ label hallway11Sister:
 
 
 label endSchoolMemories:
-    scene cauldron
+    scene cauldron_bg
     with fade
-    "You've collected all the necessary ingredients for the potion."
-    "Now you need to brew it and decide whether to drink it or not."
     "You mixed all the necessary ingredients and got the very potion that will get you out of here"
     "In your hands you hold the potion you've come all this way for."
     "You pondered over the words of this place and the sage about this potion 'getting rid of all problems'."
