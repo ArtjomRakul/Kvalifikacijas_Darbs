@@ -93,6 +93,7 @@ label start:
     show mainCharacter at center 
     with dissolve 
     p "Hmm..." 
+    show screen main_ui
     "You wake up in the middle of a field." 
     "You don't remember how you got here or where you are." 
     p "Where... Where am I?" 
@@ -360,7 +361,7 @@ label wiseManMeeting:
         # Menu item for selecting Forest Spirit Trust (Option One) 
         "Trust the Wise Man and accept his help.": 
             # Show notification of changes in relationship 
-            show screen custom_notify("Your relationship with the Sage has improved") 
+            show screen custom_notify("Your relationships has improved") #  CN01
             $ relationship_wiseMan += 1 
             "The protagonist recalls the Wise Man's behavior and his dinner."  
             "After everything he's seen, the main character doesn't really want to trust the Sage, but he decides to trust since he has no other choice." 
@@ -384,7 +385,7 @@ label wiseManMeeting:
             p "(to myself) Well, I'll move on." 
         # Menu item to refuse the help of a forest spirit(Second option) 
         "Be wary and refuse help.": 
-            show screen custom_notify("Your relationship with the Sage has deteriorated") 
+            show screen custom_notify("Your relationships has deteriorated")    # CN02
             $ relationship_wiseMan -= 1 
             "The protagonist recalls the Sage's behavior and his dinner. After all he has seen, the protagonist decides not to trust the Wise Man." 
 
@@ -554,7 +555,7 @@ label pathIntoDarkForest:
  
 # The scene of trying to talk to the Shadows 
 label talk_to_shadows: 
-    show screen custom_notify("You have overcome your fears.") 
+    show screen custom_notify("You have overcome your fears")   # CN03
     $ overcoming_fears += 1 
     "You decide to try talking to the Shadows, realizing that you can't run away from your fears." 
     "He takes a deep breath, steeling himself against the fear that threatens to overwhelm him."
@@ -584,7 +585,7 @@ label talk_to_shadows:
 # Escape scene from the Shadows  
 label run_away: 
     $ overcoming_fears -= 1 
-    show screen custom_notify("You have not overcome your fears.") 
+    show screen custom_notify("You have not overcome your fears")  # CN04
     "You decide to run away from the Shadows, realizing you can't handle them." 
     "You've never been as scared as you are right now." 
     p "(to myself) Gotta run away! Gotta run away!" 
@@ -683,7 +684,7 @@ label sisterMeeting:
 label help_sister: 
     show screen custom_notify("You have overcome your fears.") 
     pause 3.0 
-    show screen custom_notify("Your relationship with your sister has improved.") 
+    show screen custom_notify("Your relationships has improved.") 
     $ overcoming_fears += 1 
     $ relationship_sister += 1 
     "You decide to help a woman." 
@@ -778,7 +779,7 @@ label help_sister:
 label dont_help_sister: 
     show screen custom_notify("You have not overcome your fears.") 
     pause 3.0 
-    show screen custom_notify("Your relationship with your sister has deteriorated.") 
+    show screen custom_notify("Your relationship has deteriorated.") 
     $ overcoming_fears -= 1 
     $ relationship_sister -= 1 
     "You choose not to interfere with their conversation."
@@ -1738,7 +1739,7 @@ label worstEnding:
     "Unable to bear the pain, she succumbs to her sorrow, leaving this world shortly after."
     "Your family mourns, their lives forever altered by the tragedy."
     "The world continues, oblivious to your fate, the story of your life reduced to a fleeting memory."
-    show screen custom_notify("You have reached the worst ending.")
+    show screen custom_notify("You have reached the worst ending")
     "Game over."
     "The end."
     
@@ -1904,7 +1905,7 @@ label badEnding:
     "Doctors fought tirelessly to save you, but the damage was too severe."
     "Your loved ones held vigil by your bedside, praying for a miracle that never came."
     "A week later, you died without regaining consciousness, your spirit lost to the shadows of the forest."
-    show screen custom_notify("You have reached a bad ending.")
+    show screen custom_notify("You have reached a bad ending")
     "Game over."
     "The End."
 

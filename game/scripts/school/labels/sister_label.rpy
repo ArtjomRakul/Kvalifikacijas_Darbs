@@ -30,7 +30,7 @@ label sister_dialogue:
         p "Thank you so much!"
         $ remove_task("Talk to your sister in class")
         $ add_task("Go to the music class")
-        show screen custom_notify("Go to the music class")
+        show screen custom_notify("Go to the music class")  # CN09
         $ sister_interaction += 1
     elif sister_interaction == 1 and music_teacher_interaction == 1 and time_of_day == "morning":
         show sister_young at right2
@@ -56,7 +56,7 @@ label sister_dialogue:
                 "You recall that he often sat in the club room in the evenings after all his lessons and studied"
                 $ remove_task("Talk to your sister in class")
                 $ add_task("Go to the club room and meet a nerd")
-                show screen custom_notify("Go to the club room and meet a nerd")
+                show screen custom_notify("Go to the club room and meet a nerd")    # CN10
             "Leave":
                 $ sister_coin_started = False
                 $ sister_relationship -= 1
@@ -67,7 +67,7 @@ label sister_dialogue:
                 if "Talk to the music teacher" not in current_tasks:
                     $ add_task("Talk to the music teacher")
 
-                show screen custom_notify("Talk to the teachers")
+                show screen custom_notify("Talk to the teachers")   # CN11
         
         $ sister_interaction += 1
         hide sister_young
@@ -94,7 +94,7 @@ label sister_dialogue:
         if "Talk to the music teacher" not in current_tasks:
             $ add_task("Talk to the music teacher")
 
-        show screen custom_notify("Talk to the teachers")
+        show screen custom_notify("Talk to the teachers")   # CN11
         $ show_screens()
         return
     elif "Ask for notes from your sister" in current_tasks and sister_interaction == 2 and "BookGreen" not in [item[0] for item in inventory_items if item]:

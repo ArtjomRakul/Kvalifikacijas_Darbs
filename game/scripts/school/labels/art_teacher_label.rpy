@@ -19,7 +19,7 @@ label art_teacher_dialogue:
         ateacher "Class is over, it's still daytime."
         $ remove_task("Go to an art class")
         $ add_task("Talk to your sister in class")
-        show screen custom_notify("Talk to your sister in class")
+        show screen custom_notify("Talk to your sister in class")   # CN05
         $ art_teacher_interaction += 1
 
     # Interaction after talking to the sister
@@ -41,7 +41,7 @@ label art_teacher_dialogue:
             ateacher "I already went to your homeroom teacher and told him all about you. When you have time, go see him."
             $ remove_task("Talk to the art teacher")
             if "Talk to the music teacher" not in current_tasks:
-                show screen custom_notify("Talk to the class teacher")
+                show screen custom_notify("Talk to the class teacher")  # CN06
                 $ add_task("Talk to the class teacher")
                 $ art_teacher_interaction += 1
     elif "Come to the art teacher" in current_tasks:

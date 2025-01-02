@@ -42,7 +42,7 @@ label music_teacher_dialogue:
         $ music_teacher_interaction += 1
         $ remove_task("Go to the music class")
         $ add_task("Talk to your sister in class")
-        show screen custom_notify("Talk to your sister in class")
+        show screen custom_notify("Talk to your sister in class")   # CN05
     elif class_teacher_interaction == 0 and sister_interaction >= 2 and music_teacher_interaction == 1 and "Talk to the music teacher" in current_tasks:
         show MusicTeacher at right2
         show mainCharacter at left2
@@ -61,7 +61,7 @@ label music_teacher_dialogue:
         $ music_teacher_interaction += 1
         $ remove_task("Talk to the music teacher")
         if "Talk to the art teacher" not in current_tasks:
-            show screen custom_notify("Talk to the class teacher")
+            show screen custom_notify("Talk to the class teacher")  # CN06
             $ add_task("Talk to the class teacher")
     elif class_teacher_interaction == 1 and "Talk to the music teacher" in current_tasks:
         show MusicTeacher at right2

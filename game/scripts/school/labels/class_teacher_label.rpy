@@ -63,7 +63,7 @@ label class_teacher_dialogue:
         cteacher "Well, what's on your mind? You don't have much time left to study for the tests."
         p "Yeah, all right!"
         $ class_teacher_interaction += 1
-        show screen custom_notify("Talk to the music teacher")
+        show screen custom_notify("Talk to the music teacher")  # CN07
         $ remove_task("Talk to the class teacher")
         $ add_task("Talk to the music teacher")
     elif "Come to the classroom teacher" in current_tasks and class_teacher_interaction == 1:

@@ -15,7 +15,7 @@ init python:
             return "bully"
 
 # Label to start the rock-paper-scissors mini-game
-label rock_paper_scissors_game:
+label rock_paper_scissors_game: # BM02
     with fade
     show mainCharacter at left2
     show bully at right2

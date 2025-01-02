@@ -182,12 +182,12 @@ label quiz_teachers_timeout:
     jump quiz_teachers_loop     # Move to the next question
 
 # Display results and handle the next steps
-label quiz_teachers_result:
+label quiz_teachers_result: # TCHR02
     if quiz_progress == "math" and math_quiz_score >= 150:
         python:
             renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["FruitGreen"])
-        show screen custom_notify("Come to the music teacher")
+        show screen custom_notify("Talk to the music teacher")
         $ quiz_progress = "music"
         $ remove_task("Come to the classroom teacher")
         $ add_task("Come to the music teacher")
@@ -196,7 +196,7 @@ label quiz_teachers_result:
         python:
             renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["RoseWhite"])
-        show screen custom_notify("Come to the art teacher")
+        show screen custom_notify("Talk to the art teacher")
         $ quiz_progress = "drawing"
         $ remove_task("Come to the music teacher")
         $ add_task("Come to the art teacher")
@@ -205,7 +205,6 @@ label quiz_teachers_result:
         python:
             renpy.sound.play(success)
         $ add_to_inventory(*potion_ingredients["PotionGreenBlue"])
-        show screen custom_notify("Brew a potion")
         $ quiz_progress = "done"
         $ remove_task("Come to the art teacher")
         return

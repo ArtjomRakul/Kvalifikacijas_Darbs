@@ -10,12 +10,13 @@ While running game code:
   File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
     call screen display_items(room_name)
   [Previous line repeated 7 more times]
-  File "game/scripts/school/timeOfDay.rpy", line 40, in script
-    show screen craft_potion_screen
-  File "renpy/common/000statements.rpy", line 647, in execute_show_screen
-    renpy.show_screen(name, *args, **kwargs)
-Exception: Screen craft_potion_screen is not known.
-
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in <module>
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/achievements.rpy", line 15, in unlock_achievement
+    renpy.call_in_new_context("check_all_achievements")
+ScriptError: could not find label 'check_all_achievements'.
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -29,22 +30,25 @@ Full traceback:
   File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
     call screen display_items(room_name)
   [Previous line repeated 7 more times]
-  File "game/scripts/school/timeOfDay.rpy", line 40, in script
-    show screen craft_potion_screen
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1974, in execute
-    self.call("execute")
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1953, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\statements.py", line 374, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 647, in execute_show_screen
-    renpy.show_screen(name, *args, **kwargs)
-  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\display\screen.py", line 1327, in show_screen
-    raise Exception("Screen %s is not known.\n" % (name[0],))
-Exception: Screen craft_potion_screen is not known.
-
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script
+    $ unlock_achievement("First Puzzle")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 821, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in <module>
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/achievements.rpy", line 15, in unlock_achievement
+    renpy.call_in_new_context("check_all_achievements")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\game.py", line 377, in call_in_new_context
+    return renpy.execution.run_context(False)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\execution.py", line 958, in run_context
+    context.run()
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'check_all_achievements'.
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 A long way home 0.9
-Thu Jan  2 14:04:54 2025
+Thu Jan  2 15:04:32 2025

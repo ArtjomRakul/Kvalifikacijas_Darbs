@@ -24,7 +24,7 @@ init python:
 
         # If we never found it, show a notification
         if not found_item:
-            renpy.notify("Item not found in inventory")
+            renpy.notify("Item not found in inventory") # N07
 
         renpy.restart_interaction()  # Refresh the inventory display
 

@@ -1,12 +1,12 @@
 init python:
     # Function to craft the potion
-    def craft_potion():
+    def craft_potion(): # CRAFT01
         global inventory, required_potion_ingredients
         # Remove required items from inventory
         for item in required_potion_ingredients:
             remove_from_inventory(item)
         # Add the crafted potion to inventory
-        renpy.notify("You have crafted the Potion!")
+        renpy.notify("You have crafted the Potion!")    # N06
         # Proceed to the ending
         renpy.hide_screen("crafting_screen")
         renpy.jump("endSchoolMemories")

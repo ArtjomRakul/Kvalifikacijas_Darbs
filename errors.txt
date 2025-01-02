@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/scripts/school/crafting.rpy", line 31: add statement expects 1 positional arguments, got 0.
-    add
-       ^
+File "game/scripts/achievements.rpy", line 80: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievements_button:
+         ^
 
 Ren'Py Version: Ren'Py 8.3.2.24090902
-Thu Jan  2 14:06:31 2025
+Thu Jan  2 15:01:00 2025

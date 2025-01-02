@@ -69,19 +69,19 @@ init python:
         if item_name == "Paper":
             renpy.sound.play(success) # Play the success sound effect
             riddle_started = True
-            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
+            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE") # N02
             # Remove the paper from the room's items
             room_items[room_name] = [item for item in room_items[room_name] if item[0] != "Paper"]
         elif "Book" in item_name:
             if item_name not in inventory:
                 renpy.sound.play(success) # Play the success sound effect
                 inventory.append(item_name)
-                renpy.notify("You may find this book helpful.")
+                renpy.notify("You may find this book helpful")  # N03
                 # Remove the book from the room's items
                 room_items[room_name] = [item for item in room_items[room_name] if item[0] != item_name]
         else:
             renpy.sound.play(fail) # Play the fail sound effect
-            renpy.notify("This item has nothing to do with the riddle.")
+            renpy.notify("This item has nothing to do with the riddle") # N04
         renpy.call("show_room")
 
     # Function to place a book in a puzzle slot
@@ -104,8 +104,8 @@ init python:
             renpy.jump("puzzle_completed")
         else:
             renpy.sound.play(fail) # Play the fail sound effect
-            renpy.notify("The order is incorrect. Try again.")
-            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE")
+            renpy.notify("The order is incorrect. Try again")   # N05
+            renpy.notify("Find wisdom in the EARTH, peace in the SKY, and life in the green of NATURE") # N02
             # Return books to the inventory and reset slots
             for i in range(3):
                 if puzzle_slots[i] is not None:
@@ -116,6 +116,7 @@ init python:
 # Label for the puzzle completion and ending scene
 label puzzle_completed:
     # Show message for finding the potion
+    $ unlock_achievement("First Puzzle")
     scene black with fade
     centered "You have found a mysterious potion hidden in the depths of the library..."
     centered "With potion in hand, you exit the cottage, leaving its mysteries behind."

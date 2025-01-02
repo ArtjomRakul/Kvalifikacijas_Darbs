@@ -1,6 +1,619 @@
-2025-01-02 12:11:09 UTC
+2025-01-02 13:00:22 UTC
 Windows-10-10.0.22631
 Ren'Py 8.3.2.24090902
 
-Early init took 0.05s
+Early init took 0.06s
+Loading error handling took 0.04s
+Loading script took 0.50s
+Loading save slot metadata took 0.05s
+Loading persistent took 0.00s
+
+File "game/scripts/achievements.rpy", line 57: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievement_frame:
+         ^
+
+File "game/scripts/achievements.rpy", line 81: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievements_button:
+         ^
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Interface start took 0.53s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 25.15s
+Loading error handling took 0.02s
+Loading script took 0.15s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+
+File "game/scripts/achievements.rpy", line 58: style property has is not known.
+    has drop_shadow
+       ^
+
+File "game/scripts/achievements.rpy", line 81: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievements_button:
+         ^
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Interface start took 0.28s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 30.69s
+Loading error handling took 0.02s
+Loading script took 0.15s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+
+File "game/scripts/achievements.rpy", line 58: expected 'simple_expression' not found.
+    drop_shadow
+               ^
+
+File "game/scripts/achievements.rpy", line 81: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievements_button:
+         ^
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Interface start took 0.30s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 37.63s
+Loading error handling took 0.02s
+Loading script took 0.14s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+
+File "game/scripts/achievements.rpy", line 80: 'style' is not a keyword argument or valid child of the screen statement.
+    style achievements_button:
+         ^
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Interface start took 0.30s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 53.11s
 Loading error handling took 0.03s
+Loading script took 0.18s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.03s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.05s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.19s
+Cleaning stores took 0.00s
+Init translation took 0.04s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 89.52s
+Loading error handling took 0.02s
+Loading script took 0.13s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.08s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 105.71s
+Loading error handling took 0.01s
+Loading script took 0.13s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 117.77s
+Loading error handling took 0.01s
+Loading script took 0.13s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.07s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 132.73s
+Loading error handling took 0.01s
+Loading script took 0.14s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.06s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 142.32s
+Loading error handling took 0.01s
+Loading script took 0.13s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.06s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 197.21s
+Loading error handling took 0.02s
+Loading script took 0.14s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.07s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.28s
+Cleaning stores took 0.00s
+Init translation took 0.06s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Interface start took 0.08s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script call
+    call unlock_achievement("First Puzzle")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 1414, in execute
+    rv = renpy.game.context().call(label, return_site=self.next.name)
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script call
+    call unlock_achievement("First Puzzle")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'unlock_achievement'.
+
+While running game code:
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script call
+    call unlock_achievement("First Puzzle")
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script call
+    call unlock_achievement("First Puzzle")
+ScriptError: could not find label 'unlock_achievement'.
+Resetting cache.
+Early init took 248.81s
+Loading error handling took 0.01s
+Loading script took 0.13s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.09s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.05s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.07s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script
+    $ unlock_achievement("First Puzzle")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\ast.py", line 821, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in <module>
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/achievements.rpy", line 15, in unlock_achievement
+    renpy.call_in_new_context("check_all_achievements")
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\game.py", line 377, in call_in_new_context
+    return renpy.execution.run_context(False)
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\execution.py", line 958, in run_context
+    context.run()
+  File "C:\Users\artra\Downloads\renpy-8.3.2-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'check_all_achievements'.
+
+While running game code:
+  File "game/scripts/ctg_MiniGame.rpy", line 35, in script call
+    call show_room from _call_show_room
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  File "game/scripts/ctg_MiniGame.rpy", line 47, in script call
+    call screen display_items(room_name)
+  [Previous line repeated 7 more times]
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in script
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/ctg_MiniGame.rpy", line 119, in <module>
+    $ unlock_achievement("First Puzzle")
+  File "game/scripts/achievements.rpy", line 15, in unlock_achievement
+    renpy.call_in_new_context("check_all_achievements")
+ScriptError: could not find label 'check_all_achievements'.
+Resetting cache.
+Early init took 266.92s
+Loading error handling took 0.02s
+Loading script took 0.14s
+Loading save slot metadata took 0.04s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.03s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\artra\\AppData\\Roaming/RenPy/backups\\A long way home':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.09s
+DPI scale factor: 1.250000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.04s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.08s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4050 Laptop GPU/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 566.36'
+Display Info: None
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1920, 1080) physical=(1920, 991) drawable=(1920, 991)
+Maximum texture size: 4096x4096

@@ -130,7 +130,7 @@ label quiz_loop:
         jump quiz_result
 
 # Handle timeout scenario when the player doesn't answer in time
-label quiz_timeout:
+label quiz_timeout: # NQ04
     python:
         import random
         # Randomly select an answer
@@ -148,7 +148,7 @@ label quiz_result:
         jump lose_quiz
 
 # Winning scenario
-label win_quiz:
+label win_quiz: # NQ05
     python:
         renpy.sound.play(success) # Play the success sound effect
         # Add Silver Coin to inventory
@@ -158,20 +158,20 @@ label win_quiz:
     $ nerdQuizWin = True
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
-    show screen custom_notify("Bring the coin to your sister")
+    show screen custom_notify("Bring the coin to your sister")  # CN12
     hide nerd
     hide mainCharacter
     return
 
 # Losing scenario
-label lose_quiz:
+label lose_quiz:    # NQ06
     python:
         renpy.sound.play(fail) # Play the fail sound effect
         add_to_inventory(*coin_items["CoinBronze"]) # Add Bronze Coin to inventory
     n "You failed the quiz. Better luck next time!"
     $ remove_task("Go to the club room and meet a nerd")
     $ add_task("Bring the coin to your sister")
-    show screen custom_notify("Bring the coin to your sister")
+    show screen custom_notify("Bring the coin to your sister")  # CN12
     hide nerd
     hide mainCharacter
     return

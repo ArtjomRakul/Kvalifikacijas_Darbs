@@ -1,6 +1,7 @@
 label schoolMemories:
     play music chillmusic
     $ update_background()
+    call unlock_achievement("Leaving the Forest")
     "You approach the building, a sense of anticipation mixed with trepidation swirling within you."
     "The weathered wooden doors loom before you, hinting at secrets and forgotten moments held within."
     "You walk inside that building."
@@ -197,7 +198,7 @@ label hallway11Sister:
     hide sister_young 
     with dissolve
     $ add_task("Go to an art class")
-    show screen custom_notify("Go to an art class") 
+    show screen custom_notify("Go to an art class") #   CN08
     "Your sister leaves for music class, leaving you alone in the hallway."
     play music bgmusic
     jump school_exploration
@@ -224,8 +225,9 @@ label endSchoolMemories:
         "But you feel nothing... You don't feel joy or admiration. Nothing."
         "Soon, doctors give you a prognosis that you won't be able to express and feel emotions."
         "You will feel empty inside for the rest of your life."
-        show screen custom_notify("You have reached a good ending.")
+        show screen custom_notify("You have reached a good ending") # CNEND03
     else:
+        call unlock_achievement("Friendship Goal")
         "You decided not to drink the potion."
         "You realize that all the difficulties, worries and failures are part of the journey and you can't move on without it all."
         "You break the potion."
@@ -239,7 +241,7 @@ label endSchoolMemories:
         "You remember everything that happened while you were in the coma."
         "You are glad that you got out of this place, but at the same time you are a little sad.... You sometimes think about what happened to you."
         "Soon you recovered and were discharged from the hospital. You live your life to the fullest, despite all the obstacles and worries."
-        show screen custom_notify("You have reached the best ending.")
+        show screen custom_notify("You have reached the best ending")   # CNEND04
 
     "The end."
     return

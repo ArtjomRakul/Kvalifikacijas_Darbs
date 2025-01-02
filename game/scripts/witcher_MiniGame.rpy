@@ -30,7 +30,7 @@ init python:
             renpy.jump("witch_minigame_end")  # Use jump to go directly to end
 
 # Start of the mini-game label
-label witch_minigame:
+label witch_minigame:   # WTCH02
     play music seriousmusic
     # Check if mini-game has already been completed
     if witch_minigame_completed:
